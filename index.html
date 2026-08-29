@@ -179,6 +179,25 @@
   .legend button.active[data-n="profissionalizante"]{ color:var(--profi); }
   .legend button.active[data-n="especifico"]{ color:var(--especi); }
 
+  /* ---------- HOVER HINT ---------- */
+  .hover-hint{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:16px;
+    padding:9px 8vw;
+    background:var(--surface);
+    border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+  }
+  .hh-item{ display:flex; align-items:center; gap:6px; color:var(--ink-dim); }
+  .hh-dot{ width:9px; height:9px; border-radius:2px; flex:none; }
+  .hh-dot.hh-prereq{ background:#FBE0B8; box-shadow:0 0 0 1px #C98A2E; }
+  .hh-dot.hh-dependent{ background:#DAD3F2; box-shadow:0 0 0 1px #6E5FB0; }
+  @media (max-width:720px){ .hover-hint{ display:none; } }
+
   /* ---------- STRATA (main content) ---------- */
   main{ position:relative; z-index:1; }
 
@@ -236,13 +255,35 @@
     border-radius:var(--radius);
     padding:13px 14px 12px;
     cursor:pointer;
-    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    transition: transform .12s ease, border-color .12s ease, background .12s ease, opacity .15s ease, box-shadow .12s ease;
     text-align:left;
   }
   .card:hover{
     transform:translateY(-2px);
   }
   .card.dim{ opacity:0.28; }
+
+  /* pré-requisitos em hover */
+  .card.hl-source{
+    box-shadow: 0 0 0 2px var(--ore);
+    z-index:2;
+  }
+  .card.hl-prereq{
+    background:#FBE0B8 !important;
+    box-shadow: 0 0 0 1px #C98A2E;
+    z-index:1;
+  }
+  .card.hl-prereq .code{ color:#8A5A16; }
+  .card.hl-dependent{
+    background:#DAD3F2 !important;
+    box-shadow: 0 0 0 1px #6E5FB0;
+    z-index:1;
+  }
+  .card.hl-dependent .code{ color:#4B3D93; }
+  body.has-hover .card:not(.hl-source):not(.hl-prereq):not(.hl-dependent){
+    opacity:0.5;
+  }
+
   .card.n-basico{ background:var(--basico-soft); border-left-color:var(--basico); }
   .card.n-basico:hover{ background:var(--basico-soft-hi); }
   .card.n-basico .code{ color:var(--basico); }
@@ -490,6 +531,12 @@
   </div>
 </div>
 
+<div class="hover-hint">
+  <span>Passe o mouse sobre um componente para ver sua cadeia de pré-requisitos:</span>
+  <span class="hh-item"><span class="hh-dot hh-prereq"></span>pré-requisitos dele</span>
+  <span class="hh-item"><span class="hh-dot hh-dependent"></span>componentes que dependem dele</span>
+</div>
+
 <main id="strata"></main>
 
 <section class="composition">
@@ -526,6 +573,19 @@ const strataEl = document.getElementById('strata');
 const bySem = {};
 DATA.forEach(d => { (bySem[d.sem] = bySem[d.sem] || []).push(d); });
 
+// ---- Mapa de pré-requisitos (para o hover) ----
+function prereqCode(p){ return p.split(' - ')[0].trim(); }
+const prereqMap = {};   // code -> [codes dos quais ele é pré-requisito exigido]
+const dependentMap = {}; // code -> [codes que exigem esse code como pré-requisito]
+DATA.forEach(d => {
+  const codes = d.prereqs.map(prereqCode).filter(c => DATA.some(x => x.code === c));
+  prereqMap[d.code] = codes;
+  codes.forEach(c => {
+    (dependentMap[c] = dependentMap[c] || []).push(d.code);
+  });
+});
+
+
 for (let s = 1; s <= 10; s++) {
   const items = bySem[s] || [];
   if (!items.length) continue;
@@ -555,12 +615,34 @@ for (let s = 1; s <= 10; s++) {
         ${item.anual ? `<span class="anual-badge">Anual · ${ANUAL_LABEL[item.anual]}</span>` : '<span></span>'}
       </span>`;
     card.addEventListener('click', () => openModal(item.code));
+    card.addEventListener('mouseenter', () => highlightChain(item.code));
+    card.addEventListener('mouseleave', clearHighlightChain);
     grid.appendChild(card);
   });
 
   section.appendChild(marker);
   section.appendChild(grid);
   strataEl.appendChild(section);
+}
+
+// ---- Hover: cadeia de pré-requisitos ----
+function highlightChain(code){
+  document.body.classList.add('has-hover');
+  const source = document.querySelector(`.card[data-code="${code}"]`);
+  if (source) source.classList.add('hl-source');
+  (prereqMap[code] || []).forEach(c => {
+    const el = document.querySelector(`.card[data-code="${c}"]`);
+    if (el) el.classList.add('hl-prereq');
+  });
+  (dependentMap[code] || []).forEach(c => {
+    const el = document.querySelector(`.card[data-code="${c}"]`);
+    if (el) el.classList.add('hl-dependent');
+  });
+}
+function clearHighlightChain(){
+  document.body.classList.remove('has-hover');
+  document.querySelectorAll('.card.hl-source, .card.hl-prereq, .card.hl-dependent')
+    .forEach(el => el.classList.remove('hl-source', 'hl-prereq', 'hl-dependent'));
 }
 
 // ---- Modal ----
