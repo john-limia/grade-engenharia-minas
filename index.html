@@ -56,63 +56,287 @@
   /* ---------- HERO ---------- */
   .hero{
     position:relative;
-    padding:76px 8vw 56px;
+    padding:64px 8vw 60px;
     border-bottom:1px solid var(--line);
     overflow:hidden;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
   }
-  .hero-eyebrow{
+  .hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
     font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.18em;
+    font-size:11.5px;
+    letter-spacing:0.14em;
     text-transform:uppercase;
-    color:var(--ore);
-    margin-bottom:18px;
+    color:var(--ink-dim);
+    margin-bottom:22px;
+  }
+  .hero-badge .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--ore);
+    flex:none;
   }
   .hero h1{
     font-family:'Big Shoulders Display', sans-serif;
     font-weight:800;
-    font-size: clamp(44px, 8vw, 96px);
-    line-height:0.92;
-    margin:0 0 6px;
+    font-size: clamp(42px, 5.2vw, 72px);
+    line-height:0.98;
+    margin:0;
     letter-spacing:-0.01em;
-    text-transform:uppercase;
   }
-  .hero h1 span{ color:var(--ink-faint); }
+  .hero h1 .accent{ color:var(--especi); }
   .hero p.lede{
-    max-width:620px;
+    max-width:460px;
     color:var(--ink-dim);
     font-size:16px;
     line-height:1.65;
     margin:22px 0 0;
   }
-  .hero-stats{
+  .hero-cta{
     display:flex;
-    flex-wrap:wrap;
-    gap:0;
-    margin-top:44px;
-    border-top:1px solid var(--line);
+    align-items:center;
+    gap:26px;
+    margin-top:32px;
   }
-  .stat{
-    flex:1 1 140px;
-    padding:16px 20px 0 0;
-    border-right:1px solid var(--line);
+  .btn-primary{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--basico);
+    color:#F7F6F2;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    padding:13px 22px;
+    border-radius:5px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    transition:background .15s;
   }
-  .stat:last-child{border-right:none;}
-  .stat .num{
+  .btn-primary:hover{ background:#0F1D28; }
+  .btn-secondary{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--ink);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:2px;
+  }
+  .btn-secondary:hover{ border-color:var(--ink); }
+  .hero-note{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:26px;
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+  .hero-note .ic{
+    width:16px; height:16px; border-radius:50%;
+    border:1px solid var(--ink-faint);
+    display:flex; align-items:center; justify-content:center;
+    font-size:10px;
+    flex:none;
+  }
+
+  /* ---------- HERO VISUAL (cartão inclinado) ---------- */
+  .hero-visual{
+    position:relative;
+    min-height:340px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-visual::before{
+    content:"";
+    position:absolute;
+    inset:-10% -6%;
+    background-image:
+      radial-gradient(circle at 82% 12%, rgba(23,42,58,0.05) 0, transparent 55%),
+      repeating-linear-gradient(115deg, rgba(23,42,58,0.05) 0px, rgba(23,42,58,0.05) 1px, transparent 1px, transparent 26px);
+    pointer-events:none;
+  }
+  .tilt-card{
+    position:relative;
+    width:100%;
+    max-width:430px;
+    aspect-ratio:16/10.5;
+    background:linear-gradient(135deg, var(--basico) 0%, #0F1D28 100%);
+    border-radius:14px;
+    transform:rotate(-4deg);
+    box-shadow:0 24px 46px -18px rgba(23,42,58,0.45);
+    padding:24px 26px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    color:#F7F6F2;
+  }
+  .tilt-card .tc-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+  }
+  .tilt-card .tc-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:rgba(247,246,242,0.65);
+  }
+  .tilt-card .tc-icon{
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid rgba(247,246,242,0.35);
+    display:flex; align-items:center; justify-content:center;
+    flex:none;
+  }
+  .tilt-card .tc-icon svg{ width:18px; height:18px; stroke:#F7F6F2; }
+  .tilt-card .tc-mid{ margin-top:6px; }
+  .tilt-card .tc-mid .tc-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:rgba(247,246,242,0.55);
+    margin-bottom:8px;
+    display:block;
+  }
+  .tilt-card .tc-mid h3{
     font-family:'Big Shoulders Display', sans-serif;
-    font-size:34px;
     font-weight:700;
-    line-height:1;
+    font-size:30px;
+    line-height:1.02;
+    margin:0;
+    text-transform:uppercase;
+  }
+  .tilt-card .tc-mid h3 .g{ color:var(--ore); }
+  .tilt-card .tc-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:rgba(247,246,242,0.55);
+    border-top:1px solid rgba(247,246,242,0.18);
+    padding-top:12px;
+  }
+  .float-badge{
+    position:absolute;
+    background:#FFFFFF;
+    border-radius:8px;
+    padding:10px 14px;
+    box-shadow:0 14px 28px -12px rgba(23,42,58,0.3);
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .float-badge .fb-num{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    font-size:22px;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  .float-badge .fb-lbl{
+    font-size:10.5px;
+    line-height:1.25;
+    color:var(--ink-faint);
+    max-width:80px;
+  }
+  .float-badge.fb-top{ top:2%; right:0%; }
+  .float-badge.fb-bottom{ bottom:4%; left:-4%; }
+
+  @media (max-width:900px){
+    .hero{ grid-template-columns:1fr; gap:40px; }
+    .hero-visual{ min-height:280px; order:-1; }
+    .float-badge{ display:none; }
+  }
+  /* ---------- TABS ---------- */
+  .tabs{
+    display:flex;
+    gap:0;
+    padding:0 8vw;
+    background:var(--surface);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;
+  }
+  .tab-btn{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink-faint);
+    background:transparent;
+    border:none;
+    border-bottom:2px solid transparent;
+    padding:16px 20px;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:color .15s, border-color .15s;
+  }
+  .tab-btn:hover{ color:var(--ink); }
+  .tab-btn.active{ color:var(--basico); border-bottom-color:var(--ore); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .elective-intro{
+    padding:22px 8vw 0;
+  }
+  .elective-intro p{
+    max-width:640px;
+    font-size:14px;
+    line-height:1.6;
+    color:var(--ink-dim);
+    margin:0;
+  }
+  .elective-grid{
+    padding:18px 8vw 60px;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+  }
+  .card.n-optativa{ background:var(--surface-hi); border-left-color:var(--ink-faint); }
+  .card.n-optativa:hover{ background:#E6E0D4; }
+  .card.n-optativa .code{ color:var(--ink-faint); }
+
+  .empty-state{
+    padding:100px 8vw;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+  .empty-state .es-icon{
+    width:48px; height:48px;
+    border-radius:50%;
+    border:1px solid var(--line-strong);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+    color:var(--ink-faint);
+    margin-bottom:6px;
+  }
+  .empty-state h3{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-size:26px;
+    font-weight:700;
+    text-transform:uppercase;
+    margin:0;
     color:var(--ink);
   }
-  .stat .lbl{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.06em;
-    color:var(--ink-faint);
-    text-transform:uppercase;
-    margin-top:6px;
-    display:block;
+  .empty-state p{
+    max-width:380px;
+    font-size:14px;
+    color:var(--ink-dim);
+    line-height:1.6;
+    margin:0;
   }
 
   /* ---------- TOOLBAR ---------- */
@@ -331,7 +555,7 @@
   /* ---------- FOOTER STRIP ---------- */
   .composition{
     padding:48px 8vw;
-    background:var(--basico);
+    background:var(--surface);
     border-bottom:1px solid var(--line);
   }
   .composition h2{
@@ -340,7 +564,7 @@
     font-weight:700;
     text-transform:uppercase;
     margin:0 0 20px;
-    color:#F7F6F2;
+    color:var(--ink);
   }
   .comp-bar{
     display:flex;
@@ -348,7 +572,7 @@
     height:34px;
     border-radius:var(--radius);
     overflow:hidden;
-    border:1px solid rgba(247,246,242,0.25);
+    border:1px solid var(--line-strong);
   }
   .comp-bar div{ height:100%; }
   .comp-legend{
@@ -358,7 +582,7 @@
     margin-top:16px;
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;
-    color:rgba(247,246,242,0.75);
+    color:var(--ink-dim);
   }
   .comp-legend span.sw{
     display:inline-block; width:9px;height:9px; margin-right:7px; border-radius:2px; vertical-align:middle;
@@ -499,7 +723,7 @@
     .stratum-marker{ position:static; flex-direction:row; align-items:baseline; gap:10px; margin-bottom:16px; }
     .stratum-marker .depth-line{ display:none; }
     .modal-grid{ grid-template-columns:1fr; }
-    .hero{ padding:56px 6vw 40px; }
+    .hero{ padding:48px 6vw 40px; }
     .toolbar{ padding:12px 6vw; }
     .composition, footer{ padding-left:6vw; padding-right:6vw; }
   }
@@ -508,16 +732,42 @@
 <body>
 
 <section class="hero">
-  <div class="hero-eyebrow">UFBA · Escola Politécnica — Engenharia de Minas</div>
-  <h1>Matriz<br>Curricular<span>.</span></h1>
-  <p class="lede">Coluna estratigráfica do curso: cada camada é um semestre, do primeiro contato com desenho técnico e cálculo, na superfície, até o embasamento — estágio e trabalho de conclusão. Clique em qualquer componente para ver ementa, carga horária e pré-requisitos.</p>
-  <div class="hero-stats">
-    <div class="stat"><span class="num">53</span><span class="lbl">Componentes obrigatórios</span></div>
-    <div class="stat"><span class="num">10</span><span class="lbl">Semestres</span></div>
-    <div class="stat"><span class="num">3.945h</span><span class="lbl">Carga horária total</span></div>
-    <div class="stat"><span class="num">2023</span><span class="lbl">PPC aprovado em 09/08</span></div>
+  <div class="hero-copy">
+    <div class="hero-badge"><span class="dot"></span>MATRIZ CURRICULAR · ENGENHARIA DE MINAS</div>
+    <h1>Sua jornada,<br>camada a <span class="accent">camada.</span></h1>
+    <p class="lede">Organize sua trajetória na Engenharia de Minas da UFBA com clareza. Explore os componentes semestre a semestre, veja pré-requisitos, ementas e carga horária de cada um.</p>
+    <div class="hero-cta">
+      <a href="#strata" class="btn-primary" id="explore-btn">Explorar a matriz ↓</a>
+    </div>
+    <div class="hero-note"><span class="ic">?</span>Visualização de apoio. Confira a matriz oficial no PPC e no SIGAA.</div>
+  </div>
+  <div class="hero-visual">
+    <div class="tilt-card">
+      <div class="tc-top">
+        <span class="tc-label">Engenharia de Minas</span>
+        <span class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l6-11 4 7 3-5 5 9H3z"/><circle cx="7.5" cy="6.5" r="2"/></svg></span>
+      </div>
+      <div class="tc-mid">
+        <span class="tc-eyebrow">Um curso entre camadas</span>
+        <h3>Rocha.<br>Método.<br><span class="g">Futuro.</span></h3>
+      </div>
+      <div class="tc-bottom">
+        <span>UFBA · Bahia</span>
+        <span>Igeo · Poli</span>
+      </div>
+    </div>
+    <div class="float-badge fb-top"><span class="fb-num">3.945h</span><span class="fb-lbl">carga horária total do PPC</span></div>
+    <div class="float-badge fb-bottom"><span class="fb-num">10</span><span class="fb-lbl">semestres de formação</span></div>
   </div>
 </section>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="obrigatorias">Disciplinas Obrigatórias</button>
+  <button class="tab-btn" data-tab="optativas">Disciplinas Optativas</button>
+  <button class="tab-btn" data-tab="livres">Disciplinas Livres</button>
+</div>
+
+<div class="tab-panel active" id="panel-obrigatorias">
 
 <div class="toolbar">
   <div class="search-wrap">
@@ -545,7 +795,30 @@
   <div class="comp-legend" id="comp-legend"></div>
 </section>
 
-<footer>
+</div>
+
+<div class="tab-panel" id="panel-optativas">
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input id="search-opt" type="text" placeholder="Buscar por nome ou código…">
+    </div>
+  </div>
+  <div class="elective-intro">
+    <p>Componentes optativos do curso. O aluno deve cursar 6 optativas (360h) ao longo da formação — a escolha e o semestre ideal variam conforme o interesse de cada um.</p>
+  </div>
+  <div class="card-grid elective-grid" id="elective-grid"></div>
+</div>
+
+<div class="tab-panel" id="panel-livres">
+  <div class="empty-state">
+    <span class="es-icon">＋</span>
+    <h3>Disciplinas Livres</h3>
+    <p>Este espaço ainda será preenchido. Assim que as disciplinas livres forem definidas, elas aparecerão aqui.</p>
+  </div>
+</div>
+
+<footer id="footer-info">
   Informações compiladas a partir do Projeto Pedagógico do Curso de Engenharia de Minas da UFBA (Parecer nº 104, aprovado em 09/08/2023), do site oficial da UFBA, do SIGAA e do trabalho independente realizado por um estudante do curso, que optou por permanecer anônimo.<br>
   <strong>Projeto independente, sem vínculo, representação ou endosso oficial da UFBA.</strong> As informações podem estar sujeitas a alterações.
 </footer>
@@ -555,14 +828,16 @@
 </div>
 
 <script>
-const DATA = [{"code": "GEOA43", "name": "Geologia Básica", "sem": 1, "anual": null, "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "60h", "prereqs": [], "ementa": "Conceitos e métodos de estudo da ciência geológica. A geologia no contexto das Geociências. A importância da geologia no estudo dos fenômenos da natureza. Análise da litosfera, destacando os fenômenos formadores de minerais e rochas. Os processos de deformação das rochas. A tectônica de placas e a gênese das cadeias de montanhas. O tectonismo. Os fenômenos físicos e suas consequências. Os processos geológicos e seus produtos. A exploração dos recursos hídricos, energéticos, minerais e suas consequências ambientais. Visitas de campo facultativas", "nucleo": "profissionalizante"}, {"code": "GENG0020", "name": "Introdução a Engenharia de Minas", "sem": 1, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": [], "ementa": "Informação ao aluno sobre o curso de Engenharia de Minas e o perfil do egresso da UFBA. A relação da engenharia de minas com as demais profissões; A importância e uso dos Recursos Minerais para a Humanidade: explicitação das fases da mineração e sua relação com a legislação mineral; detalhamento das operações mineiras, da mecânica de rochas, dos métodos de lavra e beneficiamento; busca da compreensão da relação entre a mineração e meio ambiente. Participação de docentes e profissionais nas aulas serão realizadas com palestras de especialistas de cada área do conhecimento sobre a profissão do Engenheiro de Minas, Relações Étnico Raciais para o Ensino de História e Cultura Afro-Brasileira, Educação em Direitos Humanos e Educação Ambiental.", "nucleo": "especifico"}, {"code": "MATA37", "name": "Introdução a Lógica de Programação", "sem": 1, "anual": null, "dept": "Instituto de Computação - Departamento de Ciências da Computação", "ch": "60h", "prereqs": [], "ementa": "Desenvolvimento de algoritmos. Refinamento sucessivo. Noções de especificação e correção de algoritmos. Construção de programas aplicando conceitos de construção de algoritmos: variáveis, constantes, operadores aritméticos e expressões, estruturas de controle (atribuição, sequência, seleção, repetição, recursão). Parâmetros. Princípios de programação estruturada e modular. Documentação de programas. Teste de programas. Análise de resultados. A linguagem de programação utilizada será Pascal.", "nucleo": "basico"}, {"code": "ARQ011", "name": "Desenho Técnico I", "sem": 1, "anual": null, "dept": "Coordenação Acadêmica - Faculdade de Arquitetura", "ch": "60h", "prereqs": [], "ementa": "Introdução ao Desenho técnico, Sistemas de Representação, Desenho Arquitetônico e Desenhos Especializados.", "nucleo": "basico"}, {"code": "MATA01", "name": "Geometria Analítica", "sem": 1, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "60h", "prereqs": [], "ementa": "Álgebra vetorial. A translação e a rotação de eixos. A reta e o plano no espaço R3. As cônicas. As superfícies de revolução.", "nucleo": "basico"}, {"code": "MATA02", "name": "Cálculo A", "sem": 1, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "90h", "prereqs": [], "ementa": "Funções polinomiais e racionais. Interpolação por polinômios. O limite de funções e principais propriedades. A continuidade de funções e principais propriedades. A derivada de funções e principais propriedades; a propriedade de encadeamento. Os extremantes de funções reais de uma variável real e o polinômio de Taylor. A construção do gráfico de tais funções. A integral de uma função real definida em um intervalo limitado e fechado. Principais teoremas. O cálculo de primitivas de funções reais.", "nucleo": "basico"}, {"code": "ENGA50", "name": "Topografia A", "sem": 2, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia de Transportes e Geodésia", "ch": "60h", "prereqs": ["ARQ011 - Desenho Técnico I"], "ementa": "Fundamentos. Instrumentos e métodos de levantamento planimétricos e altimétricos. Orientação dos levantamentos topográficos. Confecção, Interpretação e Utilização da Planta Topográfica. Noções de Locação. Cálculo de Áreas e Volumes.", "nucleo": "profissionalizante"}, {"code": "GEOE53", "name": "Mineralogia Geral I", "sem": 2, "anual": null, "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "60h", "prereqs": ["GEOA43 - Geologia Básica"], "ementa": "Estudo dos conceitos básicos da mineralogia com aprofundamento nas questões da cristalografia, cristaloquímica e da classificação química dos minerais (grupos). Treinamento da identificação de minerais utilizando propriedades físicas e químicas. Noções de difração de raios X e sua aplicação na mineralogia.", "nucleo": "profissionalizante"}, {"code": "MATA03", "name": "Cálculo B", "sem": 2, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "90h", "prereqs": ["MATA01 - Geometria Analítica"], "ementa": "Aplicações de cálculo integral à Geometria, à Mecânica e a outros domínios do saber. A parametrização de curvas planares e as coordenadas polares. A integral de primeira espécie sobre curvas planares. A continuidade e a integração de funções de duas variáveis (em coordenadas cartesianas e polares). Enunciado o emprego do teorema de Fubini. As derivadas parciais e a diferenciabilidade. As derivadas direcionais. Os principais teoremas pertinentes. O estudo dos máximos e mínimos. Os extremos condicionados (métodos dos multiplicadores de Lagrange). O gráfico de funções diferenciáveis de duas variáveis reais. As funções definidas implicitamente. As curvas de nível. Os campos planares de vetores. A integral de segunda espécie sobre curvas planares: o trabalho (componente tangencial) e o fluxo (componente normal) de campos planares de vetores. O teorema de Green (forma tangencial e forma normal) e a identidade de Green (no espaço R2).", "nucleo": "basico"}, {"code": "MATA07", "name": "Álgebra Linear", "sem": 2, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "60h", "prereqs": ["MATA01 - Geometria Analítica"], "ementa": "Matrizes e sistemas lineares. Espaços vetoriais. Produto interno. Transformações lineares. Diagonalização de operadores.", "nucleo": "basico"}, {"code": "QUIA27", "name": "Química Fundamental I", "sem": 2, "anual": null, "dept": "Instituto de Química - Departamento de Química Geral e Inorgânica", "ch": "60h", "prereqs": ["———"], "ementa": "Modelo Químico da Matéria. Fenômenos e Propriedades da Matéria: físicos e químicos. Estrutura Atômica: de Dalton a Bohr. Mol e Massas Molares. Tabela Periódica: organização e usos. Forças interpartículas: ligação química e forças intermoleculares. Teoria de Lewis: ligações covalentes. Formação de Compostos Iônicos. Estados Físicos da Matéria: sólido, liquido e gasoso. Estados Dispersos da Matéria: soluções e coloides.", "nucleo": "basico"}, {"code": "FISD36", "name": "Física Geral Teórica I", "sem": 2, "anual": null, "dept": "Instituto de Física - Departamento de Física da Terra e Meio Ambiente", "ch": "60h", "prereqs": ["MATA02 - Cálculo A"], "ementa": "Conceitos básicos relativos ao estudo do movimento. Cinemática das partículas. Leis de Newton. Trabalho e energia. Conservação da energia e do movimento linear. Impulso e Colisões. Rotação dos corpos rígidos. Conservação do momento angular.", "nucleo": "basico"}, {"code": "FISD42", "name": "Física Geral Experimental I", "sem": 2, "anual": null, "dept": "Instituto de Física - Departamento de Física da Terra e Meio Ambiente", "ch": "30h", "prereqs": ["MATA02 - Cálculo A"], "ementa": "Conceitos básicos relativos ao estudo do movimento. Cinemática das partículas. Leis de Newton. Trabalho e energia. Conservação da energia e do movimento linear. Colisões. Gravitação. Rotação dos corpos rígidos. Conservação do momento angular. Atividades experimentais no laboratório dos assuntos abordados na teoria.", "nucleo": "basico"}, {"code": "GGEO0004", "name": "Geologia Estrutural", "sem": 3, "anual": "par", "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "90h", "prereqs": ["GEOA43 - Geologia Básica"], "ementa": "Reconhecimento, descrição, representação e interpretação das estruturas geológicas. Estudo da deformação das rochas sob o ponto de vista geométrico, cinemático, dinâmico e sua relação com a tectônica. Projeção estereográfica: fundamentos e aplicações. Aplicação das estruturas geológicas nos vários cenários de atuação profissional da engenharia de minas.", "nucleo": "profissionalizante"}, {"code": "QUIC90", "name": "Fundamentos de Físico Química Para Engenharia", "sem": 3, "anual": null, "dept": "Instituto de Química - Departamento de Físico-Química", "ch": "60h", "prereqs": ["QUIA27 - Química Fundamental I"], "ementa": "Gases ideal e real. Termodinâmica em sistemas diversos. Equilíbrio em sistemas unicomponentes e multicomponentes Cinética química. Fenômenos de superfície.", "nucleo": "basico"}, {"code": "MAT236", "name": "Métodos Estatísticos", "sem": 3, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "60h", "prereqs": ["MATA03 - Cálculo B"], "ementa": "Aspectos preliminares do trabalho estatístico. Séries estatísticas e representação gráfica. Médias. Separatrizes. Principais medidas de dispersão. Conceito, teoremas e leis de probabilidade. Distribuições de probabilidades. Distribuições amostrais. Intervalos de confiança. Teste de hipótese. Correlação e regressão linear simples. Ajustamento de funções matemáticas pelo método dos mínimos quadrados.", "nucleo": "basico"}, {"code": "MATA04", "name": "Cálculo C", "sem": 3, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "90h", "prereqs": ["MATA03 - Cálculo B"], "ementa": "Equações diferenciais ordinárias e sistemas de equações diferenciais lineares. As integrais impróprias e a transformação de Laplace. A resolução de equações diferenciais e de sistemas de equações diferenciais pelas transformadas de Laplace. As séries numéricas e as séries de potências. A resolução de equações diferenciais por séries de potência. Introdução à teoria qualitativa.", "nucleo": "basico"}, {"code": "ENGP82", "name": "Estática (Mecânica Geral I - ENG001)", "sem": 3, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia Mecânica", "ch": "60h", "prereqs": ["MATA03 - Cálculo B"], "ementa": "Introdução à disciplina e conteúdo. Discussão acerca dos sistemas de forças concentradas, distribuídas, momentos de uma força e os métodos de simplificação. Desenvolvimento dos princípios do equilíbrio de um corpo rígido. Aplicação de problemas de equilíbrio envolvendo treliças, vigas, cabos e hastes. Análise de forças internas e externas. Aplicações a problemas que envolvem forças de atrito. Estudo de tópicos relacionados a centro de gravidade e centróide.", "nucleo": "basico"}, {"code": "FISD34", "name": "Física Geral Teórica II", "sem": 3, "anual": null, "dept": "Instituto de Física - Departamento de Física Geral", "ch": "60h", "prereqs": ["MATA03 - Cálculo B"], "ementa": "Oscilações mecânicas. Ondas mecânicas. Ondas sonoras. Mecânica dos fluidos. Teoria cinética dos gases. Temperatura e calor. Leis da termodinâmica", "nucleo": "basico"}, {"code": "FISD41", "name": "Física Geral Experimental II", "sem": 3, "anual": null, "dept": "Instituto de Física - Departamento de Física Geral", "ch": "30h", "prereqs": ["FISD42 - Física Geral Experimental I"], "ementa": "Oscilações mecânicas, ondas mecânicas em uma dimensão, ondas sonoras, mecânica dos fluidos, teoria cinética dos gases, temperatura e calor e leis da termodinâmica. Atividades experimentais no laboratório dos assuntos abordados na teoria.", "nucleo": "basico"}, {"code": "GEOE55", "name": "Petrografia Microscópica", "sem": 4, "anual": "par", "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "60h", "prereqs": ["GEOE53 - Mineralogia Geral I"], "ementa": "Petrografia e petrologia das rochas ígneas, metamórficas e sedimentares. Descrição e classificação macroscópica das rochas ígneas, metamórficas e sedimentares com base no reconhecimento de seus constituintes minerais, além das relações entre eles. Sistemas de classificação desses três grandes grupos de rochas. Saída de campo para reconhecimento das rochas em uma frente lavra.", "nucleo": "profissionalizante"}, {"code": "MAT174", "name": "Cálculo Numérico", "sem": 4, "anual": null, "dept": "Instituto de Computação - Departamento de Computação", "ch": "60h", "prereqs": ["MATA37 - Introdução a Lógica de Programação"], "ementa": "Erro nas aproximações numéricas. Série de Taylor. Resolução numérica de equações e de sistemas de equações lineares e de grau superior. Equações de diferenças finitas. Interpolação e diferenças finitas. Diferenciação e integração numéricas. Resolução numérica de equações diferenciais e de sistemas de equações diferenciais.", "nucleo": "basico"}, {"code": "ENGP83", "name": "Legislação Trabalhista, Mineral e Ambiental", "sem": 4, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP81 - Introdução a Engenharia de Minas"], "ementa": "Uma visão global das Legislações trabalhista, mineral e ambiental. Aplicação destas legislações nas atividades de mineração. Estudos sobre Educação Ambiental e conceituação de educação e gestão ambiental na mineração.", "nucleo": "especifico"}, {"code": "ENGC30", "name": "Mecânicas dos Sólidos (Resistência dos Materiais)", "sem": 4, "anual": null, "dept": "Escola Politécnica - Departamento de Construção e Estruturas", "ch": "60h", "prereqs": ["ENGP82 - Estática"], "ementa": "Forças e binários, equilíbrio de corpos rígidos no espaço, sistemas equivalentes de forças, forças distribuídas, cálculo de reações em apoios. Propriedades de áreas: momento de primeira ordem, momento de segunda ordem, determinação do centroide. Esforços solicitantes, diagramas de esforços solicitantes. Peças submetidas a cargas axiais. Treliças, cabos. Análise de tensões através do ciclo de Mohr tridimensional. Torção de barras de seção circular. Flexão simples e oblíqua. Equação da linha elástica. Flambagem de colunas.", "nucleo": "profissionalizante"}, {"code": "ENG370", "name": "Fenômenos de Transporte I (Mecânica dos Fluídos)", "sem": 4, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia Química", "ch": "60h", "prereqs": ["FISD36 - Física Geral Teórica I"], "ementa": "Propriedades dos fluídos. Hidrostática. Cinemática e Dinâmica dos Fluídos, transferência de Calor e de Massa.", "nucleo": "profissionalizante"}, {"code": "FISD37", "name": "Física Geral Teórica III", "sem": 4, "anual": null, "dept": "Instituto de Física - Departamento de Física do Estado Sólido", "ch": "60h", "prereqs": ["FISD34 - Física Geral Teórica II"], "ementa": "Estudo teórico da teoria da eletricidade e do magnetismo clássicos, visando proporcionar ao estudante um conhecimento geral das leis e fenômenos do Eletromagnetismo necessários ao ciclo profissional.", "nucleo": "basico"}, {"code": "FISD40", "name": "Física Geral Experimental III", "sem": 4, "anual": null, "dept": "Instituto de Física - Departamento de Física do Estado Sólido", "ch": "30h", "prereqs": ["FISD41 - Física Geral Experimental II"], "ementa": "Estudo experimental do eletromagnetismo clássico, objetivando aprendizagem de conceitos fundamentais da eletrodinâmica, suas aplicações em casos práticos na física e na engenharia, bem como o desenvolvimento de habilidades de laboratório e de prática científica.", "nucleo": "basico"}, {"code": "GEOE56", "name": "Geologia Econômica", "sem": 5, "anual": "impar", "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "90h", "prereqs": ["GEOE54 - Geologia Estrutural"], "ementa": "Conceitos básicos. Classificação e gênese dos depósitos minerais (depósitos minerais metálicos e não-metálicos). Principais processos mineralizadores. Principais tipos de depósitos minerais. Mineralizações no tempo e no espaço. Principais províncias e distritos mineiros brasileiros. Explotação e meio ambiente. Atividade de Extensão: Execução de atividades de laboratório e/ou excursão de campo.", "nucleo": "profissionalizante"}, {"code": "ENG323", "name": "Termodinâmica Aplicada", "sem": 5, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia Química", "ch": "60h", "prereqs": ["QUIC90 - Fundamentos de Físico Química Para Engenharia"], "ementa": "Estudos sobre trabalho e calor realizados/fornecidos a sistemas termodinâmicos. Apresentação e aplicação da primeira e segunda Leis da Termodinâmica em sistemas fechados e volumes de controle (equações de conservação da massa, energia e entropia na forma integral). Introdução à mistura de gases e psicrometria.", "nucleo": "profissionalizante"}, {"code": "ENGP89", "name": "Operações Mineiras I", "sem": 5, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP81 - Introdução a Engenharia de Minas"], "ementa": "Descrição dos principais métodos e equipamentos de perfuração. Definição das propriedades, manuseio e seleção de explosivos utilizados na extração de bens minerais. Elaboração dos cálculos de plano de fogo e sua aplicação na lavra subterrânea e a céu aberto.", "nucleo": "especifico"}, {"code": "ENGP88", "name": "Mecânica das Rochas", "sem": 5, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GEOE54 - Geologia Estrutural"], "ementa": "O contexto da Mecânica das Rochas. Caracterização da rocha e do maciço rochoso. Exame crítico das classificações geomecânicas. Análise das tensões naturais e induzidas. Estudo da deformabilidade e resistência da rocha e do maciço rochoso. Descrição do comportamento mecânico de descontinuidades. Introdução à dinâmica de fluidos em maciços rochosos. Projeto de escavações subterrâneas. Análise de estabilidade de taludes em rocha.", "nucleo": "especifico"}, {"code": "ENGP84", "name": "Tratamento de Minérios I", "sem": 5, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GEOE53 - Mineralogia Geral I"], "ementa": "Conceituação básica de tratamento de minérios. Estudos de análise granulométrica, liberação mineral, amostragem de minérios e de balanço de massa. Fluxogramas de processos e circuitos. Fundamentos da teoria da cominuição. Fundamentos da fluidodinâmica de partículas.", "nucleo": "especifico"}, {"code": "FISD38", "name": "Física Geral Teórica IV", "sem": 5, "anual": null, "dept": "Instituto de Física - Departamento de Física do Estado Sólido", "ch": "60h", "prereqs": ["FISD37 - Física Geral Teórica III"], "ementa": "Estudo das ondas eletromagnéticas em nível básico, e suas implicações nos fenômenos ópticos. Introdução à Teoria da Relatividade Restrita e à Teoria Quântica.", "nucleo": "basico"}, {"code": "FISD39", "name": "Física Geral Experimental IV", "sem": 5, "anual": null, "dept": "Instituto de Física - Departamento de Física do Estado Sólido", "ch": "30h", "prereqs": ["FISD40 - Física Geral Experimental III"], "ementa": "Estudo experimental das ondas eletromagnéticas e fenômenos ópticos, aprendizagem de conceitos fundamentais relacionados, suas aplicações em casos práticos na física e na engenharia, bem como o desenvolvimento de habilidades de laboratório e de prática científica.", "nucleo": "basico"}, {"code": "GEOE57", "name": "Pesquisa Mineral", "sem": 6, "anual": "par", "dept": "Instituto de Geociências - Departamento de Geografia", "ch": "60h", "prereqs": ["GEOE56 - Geologia Econômica"], "ementa": "Estudo de métodos de pesquisa mineral: geológicos, geofísicos e geoquímicos. Busca de compreensão do reconhecimento geológico. Investigação sobre foto-interpretação e sensoriamento remoto. Aplicação de geoquímica e da prospecção geoquímica. Fundamentação de prospecção geofísica: métodos geofísicos e sua aplicabilidade. Desenvolvimento de mapas geológicos, geofísicos e geoquímicos. Orientação sobre abertura e escavações superficiais. Participação em atividades de laboratórios e/ou visita técnica.", "nucleo": "profissionalizante"}, {"code": "ENGP90", "name": "Operações Mineiras II", "sem": 6, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "30h", "prereqs": ["ENGP89 - Operações Mineiras I"], "ementa": "Detalhamento dos principais equipamentos de carregamento e transporte de minério e estéril. Análise da compatibilidade entres os equipamentos de carregamento e transporte. Aplicação de tecnologia para o cálculo da quantidade de equipamentos utilizados na retirada de estéril e minério em minas subterrâneas ou a céu aberto.", "nucleo": "especifico"}, {"code": "GENG0022", "name": "Estabilidade de Taludes em Mineração", "sem": 6, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP88 - Mecânica das Rochas"], "ementa": "Tipos de rupturas em taludes e mecanismos. Projeção estereográfica e análise cinemática. Redes de fluxo. Análise determinística. Fator de Segurança. Análise de tensão e deformação em taludes. Análise de perigo e risco geotécnico. Metodologias empíricas de análise de estabilidade de taludes. Manutenção, estabilização e monitoramento de taludes. Trabalho de campo como atividades de extensão universitária.", "nucleo": "especifico"}, {"code": "GENG0021", "name": "Tratamento de Minérios II", "sem": 6, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP84 - Tratamento de Minérios I"], "ementa": "Estudo do manuseio de sólidos granulares; Aspectos teóricos da britagem e moagem de minérios e suas relações com a separação por tamanho; Aplicação da classificação mecânica, hidráulica, ciclonagem e peneiramento no processamento mineral; Separação sólido-líquido: técnicas utilizadas, variáveis envolvidas, escolha de equipamentos. Espessamento e Filtração; Estudos de casos. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "ENGP91", "name": "Avaliação de Depósitos Minerais", "sem": 6, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP83 - Legislação Trabalhista, Mineral e Ambiental"], "ementa": "Conceituação e aplicação de métodos matemáticos geométricos, estatísticos e geoestatísticos para avaliação de características físico-químicas e qualificação e quantificação de recursos e reservas minerais através da análise de resultados de dados de prospecção de corpos geológicos ou naturais com continuidade espacial. Participação em visitas de campo para experimentação dos aspectos teóricos.", "nucleo": "especifico"}, {"code": "ENG003", "name": "Eletricidade", "sem": 6, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia Elétrica e de Computação", "ch": "60h", "prereqs": ["FISD37 - Física Geral Teórica III"], "ementa": "Circuitos de corrente contínua e alternada. Medidas elétricas e magnéticas. Componentes e equipamentos elétricos e eletrônicos. Noções de instalações.", "nucleo": "basico"}, {"code": "GENG0024", "name": "Tratamento de Minérios III", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["FISD37 - Física Geral Teórica III"], "ementa": "Caracterização de minérios e rejeitos. Métodos físicos de concentração. Aspectos teóricos da separação gravimétrica, magnética e eletrostática: equipamentos, variáveis e circuitos. Métodos de disposição de rejeitos. Estudos de casos. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "GENG0025", "name": "Tratamento de Minérios IV", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["QUIC90 - Fundamentos de Físico Química Para Engenharia"], "ementa": "Revisão dos conceitos de equilíbrios químicos e química orgânica, adsorção, dupla camada elétrica, dispersão e agregação, oxidação e redução. Termodinâmica de superfície. Reagentes e mecanismos de ação. Flotação de óxidos, sulfetos, minerais semi solúveis, sais solúveis, minerais naturalmente hidrofóbicos e silicatos. Cinética de flotação, equipamentos, circuitos, variáveis de processo. Estudos de casos. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "GENG0026", "name": "Lavra de Mina Subterrânea", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP88 - Mecânica das Rochas"], "ementa": "Conceitos básicos para mineração subterrânea. Princípios fundamentais da lavra subterrânea e classificação dos métodos de lavra. Critérios para seleção de um método de lavra. Métodos de lavra de autossuporte. Métodos de lavra com enchimentos. Métodos de abatimento. Operações e equipamentos de Lavra Subterrânea. Dimensionamento de pilares, escavações e suportes. Subsidência mineira. Trabalho de campo como atividade extensão universitária.", "nucleo": "especifico"}, {"code": "ENGR43", "name": "Lavra de Água Subterrânea", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GEOE54 - Geologia Estrutural"], "ementa": "Estudos das águas subterrâneas em meios porosos homogêneos e em meios heterogêneos. Fundamentos da pesquisa de água subterrânea utilizando métodos clássicos, geofísicos e sensoriamento remoto. Estabelecimento de relações entre a hidroquímica e geoquímica na qualidade das águas subterrâneas. Estudo dos métodos de explotação das águas subterrâneas com ênfase no projeto, na execução e construção, na instalação e gestão da produção de água.", "nucleo": "especifico"}, {"code": "GENG0023", "name": "Lavra de Mina à Céu Aberto", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP88 - Mecânica das Rochas"], "ementa": "Revisão das operações mineiras e estudos sobre as etapas da mineração. Estabelecimento de relações entre as técnicas de desenvolvimento mineiro e os tipos de lavra a céu aberto: lavra em tiras, em encosta, em cava, de placeres, por dragagem, de rocha ornamental, de pedreiras, por dissolução, de petróleo e especiais. Projeto prático de desenho de cava. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "GENG0027", "name": "Laboratório de Tratamento de Minério", "sem": 8, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP87 - Tratamento de Minérios IV"], "ementa": "Reflexão sobre segurança no laboratório; verificação experimental em laboratório dos princípios e proposições apresentados nos tópicos relacionados às operações unitárias: análise granulométrica, liberação, preparação de amostra, cominuição (britagem, moagem), separação por tamanho (peneiramento, classificação), desaguamento (espessamento, clarificação, filtração e secagem) e concentração mineral (gravimétricas, magnéticas, eletrostática e flotação). Implementação das atividades de extensão universitária: trabalho de campo e projetos.", "nucleo": "especifico"}, {"code": "ENGR44", "name": "Administração e Gestão na Mineração", "sem": 8, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["MAT236 - Métodos Estatísticos"], "ementa": "Busca da compreensão da legislação e noções de segurança relativa as atividades de mineração, concomitantemente ao estudo das técnicas e análises de rendimento e sequenciamento de produção e aplicação de pesquisa operacional, além da análise e aplicação de ferramentas de qualidade na mineração. Busca na compreensão de técnicas de gerenciamento de projetos e a introdução aos métodos de simulação e otimização. Introdução a teoria da administração clássica e moderna (Natureza, conceitos, função social, importância da", "nucleo": "especifico"}, {"code": "ENGP96", "name": "Avaliação Econômica de Projetos de Mineração", "sem": 8, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP84 - Tratamento de Minérios I"], "ementa": "Revisão das operações mineiras e estudos sobre as etapas da mineração. Estabelecimento de relações entre as técnicas de desenvolvimento mineiro e os tipos de lavra a céu aberto: lavra em tiras, em encosta, em cava, de placeres, por dragagem, de rocha ornamental, de pedreiras, por dissolução, de petróleo e especiais. Projeto prático de desenho de cava. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "ENGP97", "name": "Fechamento de Mina", "sem": 8, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "30h", "prereqs": ["ENGP89 - Operações Mineiras I"], "ementa": "Revisão de conceitos de Educação Ambiental. Estudo sobre os conceitos, planejamento e custos de um fechamento de minas. Confecção de Plano de Fechamento de Mina nos moldes solicitado pela Agencia Nacional de Mineração e órgãos ambientais municipais e estaduais.", "nucleo": "especifico"}, {"code": "GENG0029", "name": "Proteção do Ambiente e Condicionamento das Minas", "sem": 9, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENG323 - Termodinâmica Aplicada"], "ementa": "Aspectos ambientais em minas subterrâneas e a céu aberto. Análise e controle de poeira e fumaça. Adequação ao trabalho e limites de tolerância. Projeto de ventilação de minas subterrâneas. Práticas de segurança e a influência destas no projeto de minas. Disposição de rejeitos e resíduos. Trabalho de campo como atividade de extensão universitária.", "nucleo": "especifico"}, {"code": "GENG0028", "name": "Planejamento de Lavra de Minas I", "sem": 9, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP96 - Avaliação Econômica de Projetos de Mineração"], "ementa": "Conceituação de planejamento de lavra e aplicações de pesquisa operacional na indústria mineral; estudos de otimização de cavas, sequenciamento de lavra e, para a definição da função-benefício. Estudos dirigidos. Implementação de atividades extensionistas: trabalho de campo.", "nucleo": "especifico"}, {"code": "ENGR02", "name": "TCC em Engenharia de Minas", "sem": 10, "anual": null, "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "30h", "prereqs": ["**Todas A-Z**"], "ementa": "Integração, aplicação e aprofundamento de conhecimentos adquiridos em várias disciplinas mediante o desenvolvimento de um trabalho de pesquisa tecnológica ou científica.", "nucleo": "especifico"}, {"code": "ENGR01", "name": "Estágio Curricular em Engenharia de Minas", "sem": 10, "anual": null, "dept": "—", "ch": "300h", "prereqs": [], "ementa": "Atividades práticas a serem desenvolvidas em empresas de mineração, ou outras entidades com realização de atividades pertinentes ao objetivo do curso, baseado em um plano de estágio pré-estabelecido entre o engenheiro supervisor na empresa e o professor orientador no curso de Engenharia de Minas. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}];
+const DATA = [{"code": "GEOA43", "name": "Geologia Básica", "sem": 1, "anual": null, "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "60h", "prereqs": [], "ementa": "Conceitos e métodos de estudo da ciência geológica. A geologia no contexto das Geociências. A importância da geologia no estudo dos fenômenos da natureza. Análise da litosfera, destacando os fenômenos formadores de minerais e rochas. Os processos de deformação das rochas. A tectônica de placas e a gênese das cadeias de montanhas. O tectonismo. Os fenômenos físicos e suas consequências. Os processos geológicos e seus produtos. A exploração dos recursos hídricos, energéticos, minerais e suas consequências ambientais. Visitas de campo facultativas", "nucleo": "profissionalizante"}, {"code": "GENG0020", "name": "Introdução a Engenharia de Minas", "sem": 1, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": [], "ementa": "Informação ao aluno sobre o curso de Engenharia de Minas e o perfil do egresso da UFBA. A relação da engenharia de minas com as demais profissões; A importância e uso dos Recursos Minerais para a Humanidade: explicitação das fases da mineração e sua relação com a legislação mineral; detalhamento das operações mineiras, da mecânica de rochas, dos métodos de lavra e beneficiamento; busca da compreensão da relação entre a mineração e meio ambiente. Participação de docentes e profissionais nas aulas serão realizadas com palestras de especialistas de cada área do conhecimento sobre a profissão do Engenheiro de Minas, Relações Étnico Raciais para o Ensino de História e Cultura Afro-Brasileira, Educação em Direitos Humanos e Educação Ambiental.", "nucleo": "especifico"}, {"code": "MATA37", "name": "Introdução a Lógica de Programação", "sem": 1, "anual": null, "dept": "Instituto de Computação - Departamento de Ciências da Computação", "ch": "60h", "prereqs": [], "ementa": "Desenvolvimento de algoritmos. Refinamento sucessivo. Noções de especificação e correção de algoritmos. Construção de programas aplicando conceitos de construção de algoritmos: variáveis, constantes, operadores aritméticos e expressões, estruturas de controle (atribuição, sequência, seleção, repetição, recursão). Parâmetros. Princípios de programação estruturada e modular. Documentação de programas. Teste de programas. Análise de resultados. A linguagem de programação utilizada será Pascal.", "nucleo": "basico"}, {"code": "ARQ011", "name": "Desenho Técnico I", "sem": 1, "anual": null, "dept": "Coordenação Acadêmica - Faculdade de Arquitetura", "ch": "60h", "prereqs": [], "ementa": "Introdução ao Desenho técnico, Sistemas de Representação, Desenho Arquitetônico e Desenhos Especializados.", "nucleo": "basico"}, {"code": "MATA01", "name": "Geometria Analítica", "sem": 1, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "60h", "prereqs": [], "ementa": "Álgebra vetorial. A translação e a rotação de eixos. A reta e o plano no espaço R3. As cônicas. As superfícies de revolução.", "nucleo": "basico"}, {"code": "MATA02", "name": "Cálculo A", "sem": 1, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "90h", "prereqs": [], "ementa": "Funções polinomiais e racionais. Interpolação por polinômios. O limite de funções e principais propriedades. A continuidade de funções e principais propriedades. A derivada de funções e principais propriedades; a propriedade de encadeamento. Os extremantes de funções reais de uma variável real e o polinômio de Taylor. A construção do gráfico de tais funções. A integral de uma função real definida em um intervalo limitado e fechado. Principais teoremas. O cálculo de primitivas de funções reais.", "nucleo": "basico"}, {"code": "ENGA50", "name": "Topografia A", "sem": 2, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia de Transportes e Geodésia", "ch": "60h", "prereqs": ["ARQ011 - Desenho Técnico I"], "ementa": "Fundamentos. Instrumentos e métodos de levantamento planimétricos e altimétricos. Orientação dos levantamentos topográficos. Confecção, Interpretação e Utilização da Planta Topográfica. Noções de Locação. Cálculo de Áreas e Volumes.", "nucleo": "profissionalizante"}, {"code": "GEOE53", "name": "Mineralogia Geral I", "sem": 2, "anual": null, "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "60h", "prereqs": ["GEOA43 - Geologia Básica"], "ementa": "Estudo dos conceitos básicos da mineralogia com aprofundamento nas questões da cristalografia, cristaloquímica e da classificação química dos minerais (grupos). Treinamento da identificação de minerais utilizando propriedades físicas e químicas. Noções de difração de raios X e sua aplicação na mineralogia.", "nucleo": "profissionalizante"}, {"code": "MATA03", "name": "Cálculo B", "sem": 2, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "90h", "prereqs": ["MATA01 - Geometria Analítica", "MATA02 - Cálculo A"], "ementa": "Aplicações de cálculo integral à Geometria, à Mecânica e a outros domínios do saber. A parametrização de curvas planares e as coordenadas polares. A integral de primeira espécie sobre curvas planares. A continuidade e a integração de funções de duas variáveis (em coordenadas cartesianas e polares). Enunciado o emprego do teorema de Fubini. As derivadas parciais e a diferenciabilidade. As derivadas direcionais. Os principais teoremas pertinentes. O estudo dos máximos e mínimos. Os extremos condicionados (métodos dos multiplicadores de Lagrange). O gráfico de funções diferenciáveis de duas variáveis reais. As funções definidas implicitamente. As curvas de nível. Os campos planares de vetores. A integral de segunda espécie sobre curvas planares: o trabalho (componente tangencial) e o fluxo (componente normal) de campos planares de vetores. O teorema de Green (forma tangencial e forma normal) e a identidade de Green (no espaço R2).", "nucleo": "basico"}, {"code": "MATA07", "name": "Álgebra Linear", "sem": 2, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "60h", "prereqs": ["MATA01 - Geometria Analítica"], "ementa": "Matrizes e sistemas lineares. Espaços vetoriais. Produto interno. Transformações lineares. Diagonalização de operadores.", "nucleo": "basico"}, {"code": "QUIA27", "name": "Química Fundamental I", "sem": 2, "anual": null, "dept": "Instituto de Química - Departamento de Química Geral e Inorgânica", "ch": "60h", "prereqs": [], "ementa": "Modelo Químico da Matéria. Fenômenos e Propriedades da Matéria: físicos e químicos. Estrutura Atômica: de Dalton a Bohr. Mol e Massas Molares. Tabela Periódica: organização e usos. Forças interpartículas: ligação química e forças intermoleculares. Teoria de Lewis: ligações covalentes. Formação de Compostos Iônicos. Estados Físicos da Matéria: sólido, liquido e gasoso. Estados Dispersos da Matéria: soluções e coloides.", "nucleo": "basico"}, {"code": "FISD36", "name": "Física Geral Teórica I", "sem": 2, "anual": null, "dept": "Instituto de Física - Departamento de Física da Terra e Meio Ambiente", "ch": "60h", "prereqs": ["MATA02 - Cálculo A"], "ementa": "Conceitos básicos relativos ao estudo do movimento. Cinemática das partículas. Leis de Newton. Trabalho e energia. Conservação da energia e do movimento linear. Impulso e Colisões. Rotação dos corpos rígidos. Conservação do momento angular.", "nucleo": "basico"}, {"code": "FISD42", "name": "Física Geral Experimental I", "sem": 2, "anual": null, "dept": "Instituto de Física - Departamento de Física da Terra e Meio Ambiente", "ch": "30h", "prereqs": ["MATA02 - Cálculo A"], "ementa": "Conceitos básicos relativos ao estudo do movimento. Cinemática das partículas. Leis de Newton. Trabalho e energia. Conservação da energia e do movimento linear. Colisões. Gravitação. Rotação dos corpos rígidos. Conservação do momento angular. Atividades experimentais no laboratório dos assuntos abordados na teoria.", "nucleo": "basico"}, {"code": "GGEO0004", "name": "Geologia Estrutural", "sem": 3, "anual": "par", "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "90h", "prereqs": ["GEOA43 - Geologia Básica"], "ementa": "Reconhecimento, descrição, representação e interpretação das estruturas geológicas. Estudo da deformação das rochas sob o ponto de vista geométrico, cinemático, dinâmico e sua relação com a tectônica. Projeção estereográfica: fundamentos e aplicações. Aplicação das estruturas geológicas nos vários cenários de atuação profissional da engenharia de minas.", "nucleo": "profissionalizante"}, {"code": "QUIC90", "name": "Fundamentos de Físico Química Para Engenharia", "sem": 3, "anual": null, "dept": "Instituto de Química - Departamento de Físico-Química", "ch": "60h", "prereqs": ["QUIA27 - Química Fundamental I", "MATA03 - Cálculo B"], "ementa": "Gases ideal e real. Termodinâmica em sistemas diversos. Equilíbrio em sistemas unicomponentes e multicomponentes Cinética química. Fenômenos de superfície.", "nucleo": "basico"}, {"code": "MAT236", "name": "Métodos Estatísticos", "sem": 3, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "60h", "prereqs": ["MATA03 - Cálculo B"], "ementa": "Aspectos preliminares do trabalho estatístico. Séries estatísticas e representação gráfica. Médias. Separatrizes. Principais medidas de dispersão. Conceito, teoremas e leis de probabilidade. Distribuições de probabilidades. Distribuições amostrais. Intervalos de confiança. Teste de hipótese. Correlação e regressão linear simples. Ajustamento de funções matemáticas pelo método dos mínimos quadrados.", "nucleo": "basico"}, {"code": "MATA04", "name": "Cálculo C", "sem": 3, "anual": null, "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "90h", "prereqs": ["MATA03 - Cálculo B"], "ementa": "Equações diferenciais ordinárias e sistemas de equações diferenciais lineares. As integrais impróprias e a transformação de Laplace. A resolução de equações diferenciais e de sistemas de equações diferenciais pelas transformadas de Laplace. As séries numéricas e as séries de potências. A resolução de equações diferenciais por séries de potência. Introdução à teoria qualitativa.", "nucleo": "basico"}, {"code": "ENGP82", "name": "Estática (Mecânica Geral I - ENG001)", "sem": 3, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia Mecânica", "ch": "60h", "prereqs": ["MATA03 - Cálculo B"], "ementa": "Introdução à disciplina e conteúdo. Discussão acerca dos sistemas de forças concentradas, distribuídas, momentos de uma força e os métodos de simplificação. Desenvolvimento dos princípios do equilíbrio de um corpo rígido. Aplicação de problemas de equilíbrio envolvendo treliças, vigas, cabos e hastes. Análise de forças internas e externas. Aplicações a problemas que envolvem forças de atrito. Estudo de tópicos relacionados a centro de gravidade e centróide.", "nucleo": "basico"}, {"code": "FISD34", "name": "Física Geral Teórica II", "sem": 3, "anual": null, "dept": "Instituto de Física - Departamento de Física Geral", "ch": "60h", "prereqs": ["MATA03 - Cálculo B", "FISD36 - Física Geral Teórica I"], "ementa": "Oscilações mecânicas. Ondas mecânicas. Ondas sonoras. Mecânica dos fluidos. Teoria cinética dos gases. Temperatura e calor. Leis da termodinâmica", "nucleo": "basico"}, {"code": "FISD41", "name": "Física Geral Experimental II", "sem": 3, "anual": null, "dept": "Instituto de Física - Departamento de Física Geral", "ch": "30h", "prereqs": ["FISD42 - Física Geral Experimental I"], "ementa": "Oscilações mecânicas, ondas mecânicas em uma dimensão, ondas sonoras, mecânica dos fluidos, teoria cinética dos gases, temperatura e calor e leis da termodinâmica. Atividades experimentais no laboratório dos assuntos abordados na teoria.", "nucleo": "basico"}, {"code": "GEOE55", "name": "Petrografia Microscópica", "sem": 4, "anual": "par", "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "60h", "prereqs": ["GEOE53 - Mineralogia Geral I"], "ementa": "Petrografia e petrologia das rochas ígneas, metamórficas e sedimentares. Descrição e classificação macroscópica das rochas ígneas, metamórficas e sedimentares com base no reconhecimento de seus constituintes minerais, além das relações entre eles. Sistemas de classificação desses três grandes grupos de rochas. Saída de campo para reconhecimento das rochas em uma frente lavra.", "nucleo": "profissionalizante"}, {"code": "MAT174", "name": "Cálculo Numérico", "sem": 4, "anual": null, "dept": "Instituto de Computação - Departamento de Computação", "ch": "60h", "prereqs": ["MATA37 - Introdução a Lógica de Programação", "MATA07 - Álgebra Linear", "MATA04 - Cálculo C"], "ementa": "Erro nas aproximações numéricas. Série de Taylor. Resolução numérica de equações e de sistemas de equações lineares e de grau superior. Equações de diferenças finitas. Interpolação e diferenças finitas. Diferenciação e integração numéricas. Resolução numérica de equações diferenciais e de sistemas de equações diferenciais.", "nucleo": "basico"}, {"code": "ENGP83", "name": "Legislação Trabalhista, Mineral e Ambiental", "sem": 4, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP81 - Introdução a Engenharia de Minas"], "ementa": "Uma visão global das Legislações trabalhista, mineral e ambiental. Aplicação destas legislações nas atividades de mineração. Estudos sobre Educação Ambiental e conceituação de educação e gestão ambiental na mineração.", "nucleo": "especifico"}, {"code": "ENGC30", "name": "Mecânicas dos Sólidos (Resistência dos Materiais)", "sem": 4, "anual": null, "dept": "Escola Politécnica - Departamento de Construção e Estruturas", "ch": "60h", "prereqs": ["ENGP82 - Estática"], "ementa": "Forças e binários, equilíbrio de corpos rígidos no espaço, sistemas equivalentes de forças, forças distribuídas, cálculo de reações em apoios. Propriedades de áreas: momento de primeira ordem, momento de segunda ordem, determinação do centroide. Esforços solicitantes, diagramas de esforços solicitantes. Peças submetidas a cargas axiais. Treliças, cabos. Análise de tensões através do ciclo de Mohr tridimensional. Torção de barras de seção circular. Flexão simples e oblíqua. Equação da linha elástica. Flambagem de colunas.", "nucleo": "profissionalizante"}, {"code": "ENG370", "name": "Fenômenos de Transporte I (Mecânica dos Fluídos)", "sem": 4, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia Química", "ch": "60h", "prereqs": ["FISD36 - Física Geral Teórica I", "MATA04 - Cálculo C"], "ementa": "Propriedades dos fluídos. Hidrostática. Cinemática e Dinâmica dos Fluídos, transferência de Calor e de Massa.", "nucleo": "profissionalizante"}, {"code": "FISD37", "name": "Física Geral Teórica III", "sem": 4, "anual": null, "dept": "Instituto de Física - Departamento de Física do Estado Sólido", "ch": "60h", "prereqs": ["FISD34 - Física Geral Teórica II"], "ementa": "Estudo teórico da teoria da eletricidade e do magnetismo clássicos, visando proporcionar ao estudante um conhecimento geral das leis e fenômenos do Eletromagnetismo necessários ao ciclo profissional.", "nucleo": "basico"}, {"code": "FISD40", "name": "Física Geral Experimental III", "sem": 4, "anual": null, "dept": "Instituto de Física - Departamento de Física do Estado Sólido", "ch": "30h", "prereqs": ["FISD41 - Física Geral Experimental II"], "ementa": "Estudo experimental do eletromagnetismo clássico, objetivando aprendizagem de conceitos fundamentais da eletrodinâmica, suas aplicações em casos práticos na física e na engenharia, bem como o desenvolvimento de habilidades de laboratório e de prática científica.", "nucleo": "basico"}, {"code": "GEOE56", "name": "Geologia Econômica", "sem": 5, "anual": "impar", "dept": "Instituto de Geociências - Departamento de Geologia", "ch": "90h", "prereqs": ["GEOE54 - Geologia Estrutural", "GEOE55 - Petrografia Microscópica"], "ementa": "Conceitos básicos. Classificação e gênese dos depósitos minerais (depósitos minerais metálicos e não-metálicos). Principais processos mineralizadores. Principais tipos de depósitos minerais. Mineralizações no tempo e no espaço. Principais províncias e distritos mineiros brasileiros. Explotação e meio ambiente. Atividade de Extensão: Execução de atividades de laboratório e/ou excursão de campo.", "nucleo": "profissionalizante"}, {"code": "ENG323", "name": "Termodinâmica Aplicada", "sem": 5, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia Química", "ch": "60h", "prereqs": ["QUIC90 - Fundamentos de Físico Química Para Engenharia"], "ementa": "Estudos sobre trabalho e calor realizados/fornecidos a sistemas termodinâmicos. Apresentação e aplicação da primeira e segunda Leis da Termodinâmica em sistemas fechados e volumes de controle (equações de conservação da massa, energia e entropia na forma integral). Introdução à mistura de gases e psicrometria.", "nucleo": "profissionalizante"}, {"code": "ENGP89", "name": "Operações Mineiras I", "sem": 5, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP81 - Introdução a Engenharia de Minas", "QUIA27 - Química Fundamental I"], "ementa": "Descrição dos principais métodos e equipamentos de perfuração. Definição das propriedades, manuseio e seleção de explosivos utilizados na extração de bens minerais. Elaboração dos cálculos de plano de fogo e sua aplicação na lavra subterrânea e a céu aberto.", "nucleo": "especifico"}, {"code": "ENGP88", "name": "Mecânica das Rochas", "sem": 5, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GEOE54 - Geologia Estrutural", "ENGC30 - Mecânicas dos Sólidos", "MAT174 - Cálculo Numérico"], "ementa": "O contexto da Mecânica das Rochas. Caracterização da rocha e do maciço rochoso. Exame crítico das classificações geomecânicas. Análise das tensões naturais e induzidas. Estudo da deformabilidade e resistência da rocha e do maciço rochoso. Descrição do comportamento mecânico de descontinuidades. Introdução à dinâmica de fluidos em maciços rochosos. Projeto de escavações subterrâneas. Análise de estabilidade de taludes em rocha.", "nucleo": "especifico"}, {"code": "ENGP84", "name": "Tratamento de Minérios I", "sem": 5, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GEOE53 - Mineralogia Geral I", "ENG370 - Fenômenos de Transporte I", "MAT174 - Cálculo Numérico"], "ementa": "Conceituação básica de tratamento de minérios. Estudos de análise granulométrica, liberação mineral, amostragem de minérios e de balanço de massa. Fluxogramas de processos e circuitos. Fundamentos da teoria da cominuição. Fundamentos da fluidodinâmica de partículas.", "nucleo": "especifico"}, {"code": "FISD38", "name": "Física Geral Teórica IV", "sem": 5, "anual": null, "dept": "Instituto de Física - Departamento de Física do Estado Sólido", "ch": "60h", "prereqs": ["FISD37 - Física Geral Teórica III"], "ementa": "Estudo das ondas eletromagnéticas em nível básico, e suas implicações nos fenômenos ópticos. Introdução à Teoria da Relatividade Restrita e à Teoria Quântica.", "nucleo": "basico"}, {"code": "FISD39", "name": "Física Geral Experimental IV", "sem": 5, "anual": null, "dept": "Instituto de Física - Departamento de Física do Estado Sólido", "ch": "30h", "prereqs": ["FISD40 - Física Geral Experimental III"], "ementa": "Estudo experimental das ondas eletromagnéticas e fenômenos ópticos, aprendizagem de conceitos fundamentais relacionados, suas aplicações em casos práticos na física e na engenharia, bem como o desenvolvimento de habilidades de laboratório e de prática científica.", "nucleo": "basico"}, {"code": "GEOE57", "name": "Pesquisa Mineral", "sem": 6, "anual": "par", "dept": "Instituto de Geociências - Departamento de Geografia", "ch": "60h", "prereqs": ["GEOE56 - Geologia Econômica"], "ementa": "Estudo de métodos de pesquisa mineral: geológicos, geofísicos e geoquímicos. Busca de compreensão do reconhecimento geológico. Investigação sobre foto-interpretação e sensoriamento remoto. Aplicação de geoquímica e da prospecção geoquímica. Fundamentação de prospecção geofísica: métodos geofísicos e sua aplicabilidade. Desenvolvimento de mapas geológicos, geofísicos e geoquímicos. Orientação sobre abertura e escavações superficiais. Participação em atividades de laboratórios e/ou visita técnica.", "nucleo": "profissionalizante"}, {"code": "ENGP90", "name": "Operações Mineiras II", "sem": 6, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "30h", "prereqs": ["ENGP89 - Operações Mineiras I"], "ementa": "Detalhamento dos principais equipamentos de carregamento e transporte de minério e estéril. Análise da compatibilidade entres os equipamentos de carregamento e transporte. Aplicação de tecnologia para o cálculo da quantidade de equipamentos utilizados na retirada de estéril e minério em minas subterrâneas ou a céu aberto.", "nucleo": "especifico"}, {"code": "GENG0022", "name": "Estabilidade de Taludes em Mineração", "sem": 6, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP88 - Mecânica das Rochas", "ENGP89 - Operações Mineiras I"], "ementa": "Tipos de rupturas em taludes e mecanismos. Projeção estereográfica e análise cinemática. Redes de fluxo. Análise determinística. Fator de Segurança. Análise de tensão e deformação em taludes. Análise de perigo e risco geotécnico. Metodologias empíricas de análise de estabilidade de taludes. Manutenção, estabilização e monitoramento de taludes. Trabalho de campo como atividades de extensão universitária.", "nucleo": "especifico"}, {"code": "GENG0021", "name": "Tratamento de Minérios II", "sem": 6, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP84 - Tratamento de Minérios I"], "ementa": "Estudo do manuseio de sólidos granulares; Aspectos teóricos da britagem e moagem de minérios e suas relações com a separação por tamanho; Aplicação da classificação mecânica, hidráulica, ciclonagem e peneiramento no processamento mineral; Separação sólido-líquido: técnicas utilizadas, variáveis envolvidas, escolha de equipamentos. Espessamento e Filtração; Estudos de casos. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "ENGP91", "name": "Avaliação de Depósitos Minerais", "sem": 6, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP83 - Legislação Trabalhista, Mineral e Ambiental", "GEOE56 - Geologia Econômica"], "ementa": "Conceituação e aplicação de métodos matemáticos geométricos, estatísticos e geoestatísticos para avaliação de características físico-químicas e qualificação e quantificação de recursos e reservas minerais através da análise de resultados de dados de prospecção de corpos geológicos ou naturais com continuidade espacial. Participação em visitas de campo para experimentação dos aspectos teóricos.", "nucleo": "especifico"}, {"code": "ENG003", "name": "Eletricidade", "sem": 6, "anual": null, "dept": "Escola Politécnica - Departamento de Engenharia Elétrica e de Computação", "ch": "60h", "prereqs": ["FISD37 - Física Geral Teórica III"], "ementa": "Circuitos de corrente contínua e alternada. Medidas elétricas e magnéticas. Componentes e equipamentos elétricos e eletrônicos. Noções de instalações.", "nucleo": "basico"}, {"code": "GENG0024", "name": "Tratamento de Minérios III", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["FISD37 - Física Geral Teórica III", "ENGP85 - Tratamento de Minérios II"], "ementa": "Caracterização de minérios e rejeitos. Métodos físicos de concentração. Aspectos teóricos da separação gravimétrica, magnética e eletrostática: equipamentos, variáveis e circuitos. Métodos de disposição de rejeitos. Estudos de casos. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "GENG0025", "name": "Tratamento de Minérios IV", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["QUIC90 - Fundamentos de Físico Química Para Engenharia", "ENGP85 - Tratamento de Minérios II"], "ementa": "Revisão dos conceitos de equilíbrios químicos e química orgânica, adsorção, dupla camada elétrica, dispersão e agregação, oxidação e redução. Termodinâmica de superfície. Reagentes e mecanismos de ação. Flotação de óxidos, sulfetos, minerais semi solúveis, sais solúveis, minerais naturalmente hidrofóbicos e silicatos. Cinética de flotação, equipamentos, circuitos, variáveis de processo. Estudos de casos. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "GENG0026", "name": "Lavra de Mina Subterrânea", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP88 - Mecânica das Rochas", "ENGP89 - Operações Mineiras I", "ENGP90 - Operações Mineiras II"], "ementa": "Conceitos básicos para mineração subterrânea. Princípios fundamentais da lavra subterrânea e classificação dos métodos de lavra. Critérios para seleção de um método de lavra. Métodos de lavra de autossuporte. Métodos de lavra com enchimentos. Métodos de abatimento. Operações e equipamentos de Lavra Subterrânea. Dimensionamento de pilares, escavações e suportes. Subsidência mineira. Trabalho de campo como atividade extensão universitária.", "nucleo": "especifico"}, {"code": "ENGR43", "name": "Lavra de Água Subterrânea", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GEOE54 - Geologia Estrutural", "ENGP83 - Legislação Trabalhista, Mineral e Ambiental"], "ementa": "Estudos das águas subterrâneas em meios porosos homogêneos e em meios heterogêneos. Fundamentos da pesquisa de água subterrânea utilizando métodos clássicos, geofísicos e sensoriamento remoto. Estabelecimento de relações entre a hidroquímica e geoquímica na qualidade das águas subterrâneas. Estudo dos métodos de explotação das águas subterrâneas com ênfase no projeto, na execução e construção, na instalação e gestão da produção de água.", "nucleo": "especifico"}, {"code": "GENG0023", "name": "Lavra de Mina à Céu Aberto", "sem": 7, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP88 - Mecânica das Rochas", "ENGP89 - Operações Mineiras I", "ENGP90 - Operações Mineiras II"], "ementa": "Revisão das operações mineiras e estudos sobre as etapas da mineração. Estabelecimento de relações entre as técnicas de desenvolvimento mineiro e os tipos de lavra a céu aberto: lavra em tiras, em encosta, em cava, de placeres, por dragagem, de rocha ornamental, de pedreiras, por dissolução, de petróleo e especiais. Projeto prático de desenho de cava. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "GENG0027", "name": "Laboratório de Tratamento de Minério", "sem": 8, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP87 - Tratamento de Minérios IV", "ENGP86 - Tratamento de Minérios III"], "ementa": "Reflexão sobre segurança no laboratório; verificação experimental em laboratório dos princípios e proposições apresentados nos tópicos relacionados às operações unitárias: análise granulométrica, liberação, preparação de amostra, cominuição (britagem, moagem), separação por tamanho (peneiramento, classificação), desaguamento (espessamento, clarificação, filtração e secagem) e concentração mineral (gravimétricas, magnéticas, eletrostática e flotação). Implementação das atividades de extensão universitária: trabalho de campo e projetos.", "nucleo": "especifico"}, {"code": "ENGR44", "name": "Administração e Gestão na Mineração", "sem": 8, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["MAT236 - Métodos Estatísticos", "ENGP83 - Legislação Trabalhista, Mineral e Ambiental", "ENGP94 - Lavra de Mina Subterrânea"], "ementa": "Busca da compreensão da legislação e noções de segurança relativa as atividades de mineração, concomitantemente ao estudo das técnicas e análises de rendimento e sequenciamento de produção e aplicação de pesquisa operacional, além da análise e aplicação de ferramentas de qualidade na mineração. Busca na compreensão de técnicas de gerenciamento de projetos e a introdução aos métodos de simulação e otimização. Introdução a teoria da administração clássica e moderna (Natureza, conceitos, função social, importância da", "nucleo": "especifico"}, {"code": "ENGP96", "name": "Avaliação Econômica de Projetos de Mineração", "sem": 8, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP84 - Tratamento de Minérios I", "ENGP91 - Avaliação de Depósitos Minerais", "ENGP94 - Lavra de Mina Subterrânea", "ENGP93 - Lavra de Mina à Céu Aberto"], "ementa": "Revisão das operações mineiras e estudos sobre as etapas da mineração. Estabelecimento de relações entre as técnicas de desenvolvimento mineiro e os tipos de lavra a céu aberto: lavra em tiras, em encosta, em cava, de placeres, por dragagem, de rocha ornamental, de pedreiras, por dissolução, de petróleo e especiais. Projeto prático de desenho de cava. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}, {"code": "ENGP97", "name": "Fechamento de Mina", "sem": 8, "anual": "par", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "30h", "prereqs": ["ENGP89 - Operações Mineiras I"], "ementa": "Revisão de conceitos de Educação Ambiental. Estudo sobre os conceitos, planejamento e custos de um fechamento de minas. Confecção de Plano de Fechamento de Mina nos moldes solicitado pela Agencia Nacional de Mineração e órgãos ambientais municipais e estaduais.", "nucleo": "especifico"}, {"code": "GENG0029", "name": "Proteção do Ambiente e Condicionamento das Minas", "sem": 9, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENG323 - Termodinâmica Aplicada", "ENGP94 - Lavra de Mina Subterrânea"], "ementa": "Aspectos ambientais em minas subterrâneas e a céu aberto. Análise e controle de poeira e fumaça. Adequação ao trabalho e limites de tolerância. Projeto de ventilação de minas subterrâneas. Práticas de segurança e a influência destas no projeto de minas. Disposição de rejeitos e resíduos. Trabalho de campo como atividade de extensão universitária.", "nucleo": "especifico"}, {"code": "GENG0028", "name": "Planejamento de Lavra de Minas I", "sem": 9, "anual": "impar", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "75h", "prereqs": ["ENGP96 - Avaliação Econômica de Projetos de Mineração"], "ementa": "Conceituação de planejamento de lavra e aplicações de pesquisa operacional na indústria mineral; estudos de otimização de cavas, sequenciamento de lavra e, para a definição da função-benefício. Estudos dirigidos. Implementação de atividades extensionistas: trabalho de campo.", "nucleo": "especifico"}, {"code": "ENGR02", "name": "TCC em Engenharia de Minas", "sem": 10, "anual": null, "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "30h", "prereqs": ["Todas A-Z"], "ementa": "Integração, aplicação e aprofundamento de conhecimentos adquiridos em várias disciplinas mediante o desenvolvimento de um trabalho de pesquisa tecnológica ou científica.", "nucleo": "especifico"}, {"code": "ENGR01", "name": "Estágio Curricular em Engenharia de Minas", "sem": 10, "anual": null, "dept": "—", "ch": "300h", "prereqs": [], "ementa": "Atividades práticas a serem desenvolvidas em empresas de mineração, ou outras entidades com realização de atividades pertinentes ao objetivo do curso, baseado em um plano de estágio pré-estabelecido entre o engenheiro supervisor na empresa e o professor orientador no curso de Engenharia de Minas. Implementação das atividades de extensão universitária: trabalho de campo.", "nucleo": "especifico"}];
+const ELECTIVES = [{"code": "ADMJ38", "name": "Língua Brasileira de Sinais (LIBRAS)", "dept": "EADM - Coordenação Acadêmica", "ch": "30h", "prereqs": [], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "MATA05", "name": "Cálculo D", "dept": "Instituto de Matemática e Estatística - Departamento de Matemática", "ch": "90h", "prereqs": ["MATA04 - Cálculo C"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG017", "name": "Ciências dos Materiais Cerâmicos", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GENG0020 - Introdução a Engenharia de Minas"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGA54", "name": "Mecânica dos Solos I", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGC30 - Mecânicas dos Sólidos (Resistência dos Materiais)", "GEOA43 - Geologia Básica"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGA55", "name": "Mecânica dos Solos II", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGA54 - Mecânica dos Solos I"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG041", "name": "Materiais de Construção Mecânico I-A", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["QUIA27 - Química Fundamental I", "FISD36 - Física Geral Teórica I", "FISD42 - Física Geral Experimental I"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG042", "name": "Materiais de Construção Mecânico II-A", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENG041 - Materiais de Construção Mecânico I-A"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG136", "name": "Hidráulica", "dept": "Escola Politécnica - Departamento de Engenharia Sanitária e Ambiental", "ch": "60h", "prereqs": ["ENG370 - Fenômenos de Transportes I"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG295", "name": "Higiene e Segurança no Trabalho", "dept": "Escola Politécnica - Departamento de Engenharia Sanitária e Ambiental", "ch": "60h", "prereqs": ["FISD34 - Física Geral Teórica II", "QUIA27 - Química Fundamental I"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGC45", "name": "Instalação de Equipamentos Elétricos I", "dept": "Escola Politécnica - Departamento de Engenharia Elétrica e de Computação", "ch": "60h", "prereqs": ["ENG003 - Eletricidade"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGA01", "name": "Geodésia", "dept": "Escola Politécnica - Departamento de Engenharia de Transporte e Geodésia", "ch": "60h", "prereqs": ["ENGA50 - Topografia A"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGA52", "name": "Geoprocessamento", "dept": "Escola Politécnica - Departamento de Engenharia de Transporte e Geodésia", "ch": "60h", "prereqs": ["ENGA50 - Topografia A", "GEOA43 - Geologia Básica"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "GEO164", "name": "Estratigrafia e Sedimentologia Aplicada a Exploração de Petróleo", "dept": "Instituto de Geociências - Departamento de Geofísica", "ch": "90h", "prereqs": ["GGEO0004 - Geologia Estrutural"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "GEO204", "name": "Sedimentologia e Estratigrafia", "dept": "Instituto de Geociências - Departamento de Geofísica", "ch": "90h", "prereqs": ["GGEO0004 - Geologia Estrutural", "FISD36 - Física Geral Teórica I"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG259", "name": "Controle e Instrumentação de Processos", "dept": "Escola Politécnica - Departamento de Ciência e", "ch": "60h", "prereqs": ["GENG0024 - Tratamento de Minérios III"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG265", "name": "Projetos e Avaliação de Sistemas de Beneficiamento de Minérios", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "90h", "prereqs": ["GENG0024 - Tratamento de Minérios III", "GENG0025 - Tratamento de Minérios IV"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGF16", "name": "Hidrometalurgia", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GENG0024 - Tratamento de Minérios III", "GENG0025 - Tratamento de Minérios IV"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG260", "name": "Escavações de Túneis e Poços", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP89 - Operações Mineiras I", "ENGP88 - Mecânica das Rochas"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG261", "name": "Sistemas de Transporte Pesado", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP89 - Operações Mineiras I", "ENGP90 - Operações Mineiras II"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG262", "name": "Métodos de Lavra Contínua", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP88 - Mecânica das Rochas"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG263", "name": "Sequência de Operações e Manutenção de Equipamentos", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP89 - Operações Mineiras I", "ENGP90 - Operações Mineiras II"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENG267", "name": "Recursos Minerais do Brasil", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "45h", "prereqs": ["ENGP91 - Avaliação de Depósitos Minerais"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGR09", "name": "Tópicos Especiais em Lavra de Minas I", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP89 - Operações Mineiras I", "ENGP90 - Operações Mineiras II"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGR08", "name": "Tópicos Especiais em Lavra de Minas II", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GENG0023 - Lavra de Mina à Céu Aberto", "GENG0026 - Lavra de Mina Subterrânea"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGR07", "name": "Tópicos Especiais em Lavra de Minas III", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP96 - Avaliação Econômica de Projetos de Mineração"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGR05", "name": "Tópicos Especiais em Tratamento de Minérios I", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP84 - Tratamento de Minérios I"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGR04", "name": "Tópicos Especiais em Tratamento de Minérios II", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GENG0021 - Tratamento de Minérios II"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGR06", "name": "Tópicos Especiais em Tratamento de Minérios III", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["GENG0024 - Tratamento de Minérios III", "GENG0025 - Tratamento de Minérios IV"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}, {"code": "ENGR03", "name": "Atividade de Campo em Engenharia de Minas", "dept": "Escola Politécnica - Departamento de Ciência e Tecnologia dos Materiais", "ch": "60h", "prereqs": ["ENGP89 - Operações Mineiras I", "ENGP88 - Mecânica das Rochas", "GENG0021 - Tratamento de Minérios II"], "nucleo": "optativa", "ementa": "", "sem": null, "anual": null}];
 
 const ANUAL_LABEL = { impar: 'Primeiro Semestre', par: 'Segundo Semestre' };
 
 const NUCLEO_LABEL = {
   basico: 'Núcleo Básico',
   profissionalizante: 'Núcleo Profissionalizante',
-  especifico: 'Núcleo Específico'
+  especifico: 'Núcleo Específico',
+  optativa: 'Optativa'
 };
 const SEM_LABEL = {
   1:'Superfície', 2:'Sedimentar', 3:'Sedimentar', 4:'Transição', 5:'Transição',
@@ -650,14 +925,23 @@ const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modal');
 
 function nucleoColorVar(n){
-  return n === 'basico' ? 'var(--basico)' : n === 'profissionalizante' ? 'var(--profi)' : 'var(--especi)';
+  if (n === 'basico') return 'var(--basico)';
+  if (n === 'profissionalizante') return 'var(--profi)';
+  if (n === 'optativa') return 'var(--ink-dim)';
+  return 'var(--especi)';
 }
 function nucleoSoftVar(n){
-  return n === 'basico' ? 'var(--basico-soft)' : n === 'profissionalizante' ? 'var(--profi-soft)' : 'var(--especi-soft)';
+  if (n === 'basico') return 'var(--basico-soft)';
+  if (n === 'profissionalizante') return 'var(--profi-soft)';
+  if (n === 'optativa') return 'var(--surface-hi)';
+  return 'var(--especi-soft)';
+}
+function findAny(code){
+  return DATA.find(d => d.code === code) || ELECTIVES.find(d => d.code === code);
 }
 
 function openModal(code){
-  const item = DATA.find(d => d.code === code);
+  const item = findAny(code);
   if (!item) return;
   const color = nucleoColorVar(item.nucleo);
   const soft = nucleoSoftVar(item.nucleo);
@@ -665,7 +949,7 @@ function openModal(code){
   const prereqHtml = item.prereqs.length
     ? `<div class="prereq-chips">${item.prereqs.map(p => {
         const pc = p.split(' - ')[0].trim();
-        const exists = DATA.some(d => d.code === pc);
+        const exists = !!findAny(pc);
         return `<span class="prereq-chip" data-jump="${exists ? pc : ''}">${p}</span>`;
       }).join('')}</div>`
     : `<span class="no-prereq">Não há pré-requisitos.</span>`;
@@ -673,7 +957,7 @@ function openModal(code){
   modal.innerHTML = `
     <div class="modal-top">
       <div>
-        <span class="m-code mono" style="color:${color}">${item.code} · ${item.sem}º semestre</span>
+        <span class="m-code mono" style="color:${color}">${item.code}${item.sem ? ` · ${item.sem}º semestre` : ''}</span>
         <h3 class="m-name">${item.name}</h3>
         <span class="modal-badge" style="color:${color}; background:${soft}">${NUCLEO_LABEL[item.nucleo]}</span>
       </div>
@@ -690,7 +974,7 @@ function openModal(code){
     </div>
     <div class="modal-section">
       <span class="k">Ementa</span>
-      <p>${item.ementa || 'Ementa não disponível no PPC consultado.'}</p>
+      <p>${item.ementa || 'Ementa não disponível no material consultado.'}</p>
     </div>
   `;
 
@@ -736,11 +1020,11 @@ function applyFilters(){
 
 // ---- Composition bar (PPC §6.2, percentuais de carga horária) ----
 const COMP = [
-  {label:'Núcleo Específico', pct:41, color:'var(--especi)'},
-  {label:'Núcleo Básico', pct:31, color:'var(--basico)'},
-  {label:'Núcleo Profissionalizante', pct:17, color:'var(--profi)'},
+  {label:'Núcleo Específico', pct:41, color:'#F3C9C9'},
+  {label:'Núcleo Básico', pct:31, color:'#C9E8F4'},
+  {label:'Núcleo Profissionalizante', pct:17, color:'#CCE8D2'},
   {label:'Optativas', pct:9, color:'#9AA4AC'},
-  {label:'Atividades Complementares', pct:2, color:'var(--ore)'},
+  {label:'Atividades Complementares', pct:2, color:'#C89B3C'},
 ];
 const bar = document.getElementById('comp-bar');
 const compLegend = document.getElementById('comp-legend');
@@ -752,6 +1036,43 @@ COMP.forEach(c => {
   const li = document.createElement('div');
   li.innerHTML = `<span class="sw" style="background:${c.color}"></span>${c.label} — ${c.pct}%`;
   compLegend.appendChild(li);
+});
+
+// ---- Tabs ----
+function activateTab(name){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `panel-${name}`));
+}
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+});
+document.getElementById('explore-btn').addEventListener('click', e => {
+  e.preventDefault();
+  activateTab('obrigatorias');
+  document.getElementById('strata').scrollIntoView({ behavior:'smooth' });
+});
+
+// ---- Grid de optativas ----
+const electiveGrid = document.getElementById('elective-grid');
+ELECTIVES.forEach(item => {
+  const card = document.createElement('button');
+  card.className = 'card n-optativa';
+  card.dataset.code = item.code;
+  card.innerHTML = `
+    <span class="code">${item.code}</span>
+    <span class="name">${item.name}</span>
+    <span class="foot"><span>${item.ch}</span><span></span></span>`;
+  card.addEventListener('click', () => openModal(item.code));
+  electiveGrid.appendChild(card);
+});
+
+document.getElementById('search-opt').addEventListener('input', e => {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('#elective-grid .card').forEach(card => {
+    const code = card.dataset.code.toLowerCase();
+    const name = card.querySelector('.name').textContent.toLowerCase();
+    card.style.display = (!q || code.includes(q) || name.includes(q)) ? '' : 'none';
+  });
 });
 </script>
 </body>
