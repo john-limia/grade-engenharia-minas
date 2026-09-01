@@ -1750,17 +1750,18 @@ function openCellPicker(key, cell){
   document.body.appendChild(pop);
   const r = cell.getBoundingClientRect();
   const popW = 260;
-  let left = r.left + window.scrollX;
+  let left = r.left;
   if (left + popW > window.innerWidth - 12) left = window.innerWidth - popW - 12;
+  if (left < 12) left = 12;
   pop.style.width = popW + 'px';
   pop.style.left = left + 'px';
-  let top = r.bottom + window.scrollY + 6;
+  let top = r.bottom + 6;
   pop.style.top = top + 'px';
   // se abrir para fora da tela embaixo, sobe o popover
   requestAnimationFrame(() => {
     const pr = pop.getBoundingClientRect();
     if (pr.bottom > window.innerHeight) {
-      pop.style.top = (r.top + window.scrollY - pr.height - 6) + 'px';
+      pop.style.top = Math.max(12, r.top - pr.height - 6) + 'px';
     }
   });
 
