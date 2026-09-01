@@ -611,6 +611,14 @@
     .ph-status-ok{ color:#2f6b3f; }
     .ph-status-pending{ color:#a34b32; }
     .ph-foot{ display:block !important; font-size:8.5px; color:#666; border-top:1px solid #ccc; padding-top:8px; margin-top:10px; text-align:center; line-height:1.6; }
+    table.ph-table tr, table.ph-grid tr{ break-inside:avoid; }
+    .ph-tablewrap-title{ break-after:avoid; }
+    table.ph-grid{ width:100%; border-collapse:collapse; font-size:10px; margin-bottom:4px; }
+    table.ph-grid thead{ display:table-header-group; }
+    table.ph-grid th{ background:#f3f3f3; border:1px solid #999; padding:5px 4px; font-size:9px; text-transform:uppercase; text-align:center; }
+    table.ph-grid td{ border:1px solid #bbb; padding:5px 3px; text-align:center; font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:9.5px; }
+    table.ph-grid td.ph-time{ font-weight:400; font-size:8px; color:#666; white-space:nowrap; background:#fafafa; }
+    table.ph-grid td.ph-empty{ color:#ccc; font-weight:400; }
   }
 
   /* ---------- AVISOS DA GRADE ---------- */
@@ -700,7 +708,7 @@
     .hero, .tabs, .toolbar, .hover-hint, .composition, footer,
     #panel-obrigatorias, #panel-optativas, #panel-livres,
     .student-form, .grade-banner, .selected-list, .weekgrid-foot, .weekgrid-actions,
-    .grade-picker, .grade-warnings,
+    .grade-picker, .grade-warnings, .weekgrid-head, #weekgrid-table,
     .overlay { display:none !important; }
     .weekgrid-wrap{ padding:0; }
   }
@@ -1984,6 +1992,24 @@ function buildPrintDocument(){
       <table class="ph-table">
         <thead><tr><th>Componente curricular</th><th>Horários atribuídos</th><th>Situação</th></tr></thead>
         <tbody>${rows || '<tr><td colspan="3" style="text-align:center;color:#888">Nenhum componente selecionado</td></tr>'}</tbody>
+      </table>
+    </div>
+    <div class="ph-tablewrap">
+      <div class="ph-tablewrap-title">Grade semanal</div>
+      <table class="ph-grid">
+        <thead><tr><th>Horário</th>${DAYS.map(d => `<th>${d}</th>`).join('')}</tr></thead>
+        <tbody>${TIME_SLOTS.map((time, idx) => {
+          const cells = DAYS.map(day => {
+            const code = gridState[`${day}-${idx}`];
+            if (!code) return `<td class="ph-empty">---</td>`;
+            const item = findAny(code);
+            const color = item && item.nucleo === 'basico' ? '#172A3A'
+              : item && item.nucleo === 'profissionalizante' ? '#4F6F52'
+              : '#6B4630';
+            return `<td style="color:${color}">${code}</td>`;
+          }).join('');
+          return `<tr><td class="ph-time">${time}<br>${addMinutes(time, 55)}</td>${cells}</tr>`;
+        }).join('')}</tbody>
       </table>
     </div>
   `;
