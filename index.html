@@ -470,7 +470,7 @@
   .wg-cell{
     border-right:1px solid var(--line);
     border-bottom:1px solid var(--line);
-    min-height:36px;
+    min-height:48px;
     display:flex; align-items:center; justify-content:center;
     font-size:11px;
     position:relative;
@@ -495,13 +495,7 @@
   .wg-slot{ cursor:pointer; background:var(--void); }
   .wg-slot:nth-child(odd){ background:var(--surface); }
   .wg-slot:hover{ background:var(--basico-soft); }
-  .wg-slot select{
-    width:100%; height:100%;
-    border:none; background:transparent;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10px;
-    color:var(--ink-dim);
-  }
+  .wg-slot.drag-over{ background:var(--ore) !important; opacity:0.35; }
   .wg-block{
     width:100%; height:100%;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -512,7 +506,10 @@
     text-align:center;
     padding:2px;
     position:relative;
+    cursor:grab;
   }
+  .wg-block:active{ cursor:grabbing; }
+  .wg-block.dragging{ opacity:0.35; }
   .wg-block .wg-x{
     position:absolute; top:1px; right:2px;
     font-size:10px;
@@ -557,11 +554,118 @@
   }
   .grade-picker .card-grid{ margin-bottom:8px; }
 
+  /* ---------- FORMULÁRIO DO ALUNO ---------- */
+  .student-form{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    padding:18px 8vw;
+    background:var(--surface-hi);
+    border-bottom:1px solid var(--line);
+    align-items:flex-end;
+  }
+  .sf-field{ display:flex; flex-direction:column; gap:5px; flex:1 1 160px; min-width:120px; }
+  .sf-field.sf-narrow{ flex:0 1 130px; }
+  .sf-field label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .sf-field input, .sf-field select{
+    background:#FFFFFF;
+    border:1px solid var(--line-strong);
+    border-radius:6px;
+    padding:10px 12px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    outline:none;
+  }
+  .sf-field input:focus, .sf-field select:focus{ border-color:var(--ore); }
+
+  .print-header{ display:none; }
+  @media print{
+    .print-header{
+      display:block;
+      padding:16px 0 20px;
+      font-family:'IBM Plex Sans', sans-serif;
+    }
+    .print-header .ph-name{ font-size:18px; font-weight:700; color:var(--ink); }
+    .print-header .ph-meta{ font-size:12px; color:var(--ink-dim); margin-top:2px; }
+  }
+
+  /* ---------- AVISOS DA GRADE ---------- */
+  .grade-warnings{
+    display:none;
+    flex-direction:column;
+    gap:8px;
+    padding:0 8vw;
+    margin-top:16px;
+  }
+  .grade-warn{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:11px 14px;
+    border-radius:6px;
+    font-size:13px;
+    line-height:1.5;
+  }
+  .grade-warn .gw-icon{ flex:none; font-size:14px; }
+  .grade-warn-hours{ background:var(--especi-soft); color:#5A3220; border:1px solid rgba(107,70,48,0.3); }
+  .grade-warn-prereq{ background:#FBE0B8; color:#5A3E12; border:1px solid rgba(200,155,60,0.4); }
+  .grade-warn-offer{ background:var(--basico-soft); color:#0F2C3F; border:1px solid rgba(23,42,58,0.3); }
+
+  /* ---------- POPOVER DE ESCOLHA DE CÉLULA ---------- */
+  .cell-popover{
+    position:fixed;
+    background:#FFFFFF;
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    box-shadow:0 20px 40px -12px rgba(23,42,58,0.35);
+    z-index:200;
+    max-height:340px;
+    overflow-y:auto;
+    padding:6px;
+  }
+  .cp-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    padding:8px 10px 6px;
+  }
+  .cp-item{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    width:100%;
+    text-align:left;
+    background:transparent;
+    border:none;
+    border-radius:6px;
+    padding:9px 10px;
+    cursor:pointer;
+    border-left:3px solid transparent;
+  }
+  .cp-item:hover:not([disabled]){ background:var(--surface-hi); }
+  .cp-item[disabled]{ opacity:0.4; cursor:not-allowed; }
+  .cp-item.n-basico{ border-left-color:var(--basico); }
+  .cp-item.n-profissionalizante{ border-left-color:var(--profi); }
+  .cp-item.n-especifico{ border-left-color:var(--especi); }
+  .cp-code{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; font-weight:600; color:var(--ink); }
+  .cp-name{ font-size:12.5px; color:var(--ink-dim); }
+  .cp-rem{ font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--ore); margin-top:2px; }
+
   @media print{
     .hero, .tabs, .toolbar, .hover-hint, .composition, footer,
     #panel-obrigatorias, #panel-optativas, #panel-livres,
-    .grade-banner, .selected-list, .weekgrid-foot, .weekgrid-actions,
-    .grade-picker,
+    .student-form, .grade-banner, .selected-list, .weekgrid-foot, .weekgrid-actions,
+    .grade-picker, .grade-warnings,
     .overlay { display:none !important; }
     .weekgrid-wrap{ padding:0; }
   }
@@ -1082,6 +1186,29 @@
 </div>
 
 <div class="tab-panel" id="panel-montar-grade">
+  <div class="student-form" id="student-form">
+    <div class="sf-field">
+      <label for="sf-nome">Nome</label>
+      <input id="sf-nome" type="text" placeholder="Seu nome">
+    </div>
+    <div class="sf-field">
+      <label for="sf-sobrenome">Sobrenome</label>
+      <input id="sf-sobrenome" type="text" placeholder="Seu sobrenome">
+    </div>
+    <div class="sf-field sf-narrow">
+      <label for="sf-ano">Ano atual</label>
+      <input id="sf-ano" type="number" placeholder="2026" min="2000" max="2100">
+    </div>
+    <div class="sf-field sf-narrow">
+      <label for="sf-semestre">Semestre atual</label>
+      <select id="sf-semestre">
+        <option value="">—</option>
+        <option value="1">1º semestre</option>
+        <option value="2">2º semestre</option>
+      </select>
+    </div>
+  </div>
+
   <div class="grade-banner" id="grade-banner">
     <div class="gb-left">
       <span class="gb-icon">✓</span>
@@ -1098,9 +1225,12 @@
     </div>
   </div>
 
+  <div class="grade-warnings" id="grade-warnings"></div>
+
   <div class="selected-list" id="selected-list"></div>
 
   <div class="weekgrid-wrap">
+    <div id="print-header" class="print-header"></div>
     <div class="weekgrid-head">
       <div>
         <strong>Grade semanal</strong>
@@ -1424,6 +1554,23 @@ const gridState = {}; // `${dia}-${slotIdx}` -> code
 const DAYS = ['SEG','TER','QUA','QUI','SEX','SÁB'];
 const TIME_SLOTS = ['07:00','07:55','08:50','09:45','10:40','11:35','13:00','13:55','14:50','15:45','16:40','17:35','18:30','19:25','20:20','21:15'];
 
+const studentInfo = { nome: '', sobrenome: '', ano: '', semestre: '' };
+['nome','sobrenome'].forEach(f => {
+  document.getElementById(`sf-${f}`).addEventListener('input', e => {
+    studentInfo[f] = e.target.value.trim();
+    renderGradeBanner();
+  });
+});
+document.getElementById('sf-ano').addEventListener('input', e => {
+  studentInfo.ano = e.target.value.trim();
+  renderGradeBanner();
+});
+document.getElementById('sf-semestre').addEventListener('change', e => {
+  studentInfo.semestre = e.target.value;
+  renderGradeBanner();
+  renderWarnings();
+});
+
 function parseHours(ch){
   const m = String(ch).match(/(\d+)/);
   return m ? parseInt(m[1], 10) : 0;
@@ -1448,6 +1595,65 @@ function toggleSelect(code){
   renderSelectedList();
   renderGradeBanner();
   renderWeekGrid();
+  renderWarnings();
+}
+
+// ---- Avisos: carga horária, conflito de pré-requisitos e oferta no semestre ----
+const HOURS_LIMIT = 540;
+function renderWarnings(){
+  const box = document.getElementById('grade-warnings');
+  const items = [...selectedCodes].map(findAny).filter(Boolean);
+  const warnings = [];
+
+  const totalHours = items.reduce((s, i) => s + parseHours(i.ch), 0);
+  if (totalHours > HOURS_LIMIT) {
+    warnings.push({
+      type: 'hours',
+      icon: '⚠',
+      html: `<strong>Carga horária acima do limite.</strong> Você selecionou ${totalHours}h — isso é ${totalHours - HOURS_LIMIT}h acima do limite de ${HOURS_LIMIT}h por semestre.`
+    });
+  }
+
+  const seenPairs = new Set();
+  items.forEach(item => {
+    (item.prereqs || []).forEach(p => {
+      const pc = p.split(' - ')[0].trim();
+      if (selectedCodes.has(pc)) {
+        const pairKey = [item.code, pc].sort().join('|');
+        if (seenPairs.has(pairKey)) return;
+        seenPairs.add(pairKey);
+        const pre = findAny(pc);
+        warnings.push({
+          type: 'prereq',
+          icon: '⛔',
+          html: `<strong>Quebra de pré-requisito.</strong> A disciplina ${pc}${pre ? ' — ' + pre.name : ''} é pré-requisito de ${item.code} — ${item.name}, e ambas foram selecionadas para o mesmo semestre.`
+        });
+      }
+    });
+  });
+
+  if (studentInfo.semestre) {
+    const expected = studentInfo.semestre === '1' ? 'impar' : 'par';
+    items.forEach(item => {
+      if (item.anual && item.anual !== expected) {
+        warnings.push({
+          type: 'offer',
+          icon: 'ℹ',
+          html: `<strong>Disciplina não ofertada nesse período.</strong> A disciplina ${item.code} — ${item.name} não é ofertada no ${studentInfo.semestre}º semestre. Ela é ofertada apenas no ${ANUAL_LABEL[item.anual]}.`
+        });
+      }
+    });
+  }
+
+  if (!warnings.length) {
+    box.style.display = 'none';
+    box.innerHTML = '';
+    return;
+  }
+  box.style.display = 'flex';
+  box.innerHTML = warnings.map(w =>
+    `<div class="grade-warn grade-warn-${w.type}"><span class="gw-icon">${w.icon}</span><span>${w.html}</span></div>`
+  ).join('');
 }
 
 function syncCardButtons(){
@@ -1469,12 +1675,17 @@ function renderGradeBanner(){
   document.getElementById('gb-hours').textContent = totalHours + 'h';
   document.getElementById('gb-obrig').textContent = obrig;
   document.getElementById('gb-opt').textContent = opt;
-  document.getElementById('gb-title').textContent = count === 0
-    ? 'Sua grade começa aqui'
-    : `Você tem ${count} componente${count > 1 ? 's' : ''} selecionado${count > 1 ? 's' : ''}`;
-  document.getElementById('gb-subtitle').textContent = count === 0
-    ? 'Adicione disciplinas na lista abaixo para montar seu mapa semanal.'
-    : 'Distribua cada um na grade semanal abaixo.';
+
+  const fullName = [studentInfo.nome, studentInfo.sobrenome].filter(Boolean).join(' ');
+  if (count === 0) {
+    document.getElementById('gb-title').textContent = fullName ? `Grade de ${fullName}` : 'Sua grade começa aqui';
+    document.getElementById('gb-subtitle').textContent = 'Adicione disciplinas na lista abaixo para montar seu mapa semanal.';
+  } else {
+    document.getElementById('gb-title').textContent = fullName
+      ? `Grade de ${fullName} — ${count} componente${count > 1 ? 's' : ''}`
+      : `Você tem ${count} componente${count > 1 ? 's' : ''} selecionado${count > 1 ? 's' : ''}`;
+    document.getElementById('gb-subtitle').textContent = 'Distribua cada um na grade semanal abaixo.';
+  }
 }
 
 function renderSelectedList(){
@@ -1498,38 +1709,70 @@ function updateWeekSubtitle(){
     : `${assigned} horário${assigned > 1 ? 's' : ''} preenchido${assigned > 1 ? 's' : ''}`;
 }
 
+// ---- Popover grande para escolher a disciplina de uma célula ----
+let openPopover = null;
+function closePopover(){
+  if (openPopover) { openPopover.remove(); openPopover = null; }
+  document.removeEventListener('mousedown', onPopoverOutsideClick, true);
+}
+function onPopoverOutsideClick(e){
+  if (openPopover && !openPopover.contains(e.target)) closePopover();
+}
+
 function openCellPicker(key, cell){
+  closePopover();
   if (selectedCodes.size === 0) return;
-  const select = document.createElement('select');
-  const blank = document.createElement('option');
-  blank.textContent = 'Escolher…';
-  blank.value = '';
-  select.appendChild(blank);
+
+  const pop = document.createElement('div');
+  pop.className = 'cell-popover';
+  const title = document.createElement('div');
+  title.className = 'cp-title';
+  title.textContent = 'Escolha a disciplina para este horário';
+  pop.appendChild(title);
+
   [...selectedCodes].map(findAny).filter(Boolean).forEach(item => {
     const need = neededBlocks(item);
     const have = placedBlocks(item.code);
     const remaining = need - have;
-    const opt = document.createElement('option');
-    opt.value = item.code;
-    opt.textContent = remaining > 0
-      ? `${item.code} — ${item.name} (faltam ${remaining})`
-      : `${item.code} — ${item.name} (completo)`;
-    select.appendChild(opt);
-  });
-  select.addEventListener('change', () => {
-    if (select.value) {
-      gridState[key] = select.value;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `cp-item n-${item.nucleo}`;
+    btn.innerHTML = `<span class="cp-code">${item.code}</span><span class="cp-name">${item.name}</span><span class="cp-rem">${remaining > 0 ? `faltam ${remaining} bloco${remaining > 1 ? 's' : ''}` : 'completo — clique para trocar aqui'}</span>`;
+    btn.addEventListener('click', () => {
+      gridState[key] = item.code;
+      closePopover();
       renderWeekGrid();
       renderSelectedList();
+    });
+    pop.appendChild(btn);
+  });
+
+  document.body.appendChild(pop);
+  const r = cell.getBoundingClientRect();
+  const popW = 260;
+  let left = r.left + window.scrollX;
+  if (left + popW > window.innerWidth - 12) left = window.innerWidth - popW - 12;
+  pop.style.width = popW + 'px';
+  pop.style.left = left + 'px';
+  let top = r.bottom + window.scrollY + 6;
+  pop.style.top = top + 'px';
+  // se abrir para fora da tela embaixo, sobe o popover
+  requestAnimationFrame(() => {
+    const pr = pop.getBoundingClientRect();
+    if (pr.bottom > window.innerHeight) {
+      pop.style.top = (r.top + window.scrollY - pr.height - 6) + 'px';
     }
   });
-  select.addEventListener('blur', () => renderWeekGrid());
-  cell.innerHTML = '';
-  cell.appendChild(select);
-  select.focus();
+
+  openPopover = pop;
+  setTimeout(() => document.addEventListener('mousedown', onPopoverOutsideClick, true), 0);
 }
 
+// ---- Drag and drop dos blocos já encaixados ----
+let dragSource = null;
+
 function renderWeekGrid(){
+  closePopover();
   const table = document.getElementById('weekgrid-table');
   table.innerHTML = '';
   const corner = document.createElement('div');
@@ -1551,19 +1794,62 @@ function renderWeekGrid(){
       const key = `${day}-${slotIdx}`;
       const cell = document.createElement('div');
       cell.className = 'wg-cell wg-slot';
+      cell.dataset.key = key;
       const code = gridState[key];
+
       if (code) {
         const item = findAny(code);
-        cell.innerHTML = `<div class="wg-block n-${item ? item.nucleo : ''}">${code}<span class="wg-x" data-key="${key}">✕</span></div>`;
-        cell.querySelector('.wg-x').addEventListener('click', e => {
+        const block = document.createElement('div');
+        block.className = `wg-block n-${item ? item.nucleo : ''}`;
+        block.draggable = true;
+        block.innerHTML = `${code}<span class="wg-x" data-key="${key}">✕</span>`;
+        block.addEventListener('dragstart', e => {
+          dragSource = key;
+          block.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', key);
+        });
+        block.addEventListener('dragend', () => {
+          block.classList.remove('dragging');
+          dragSource = null;
+        });
+        block.querySelector('.wg-x').addEventListener('click', e => {
           e.stopPropagation();
           delete gridState[key];
           renderWeekGrid();
           renderSelectedList();
         });
+        cell.appendChild(block);
       } else {
         cell.addEventListener('click', () => openCellPicker(key, cell));
       }
+
+      // alvo de drop (célula vazia ou ocupada — permite trocar de lugar)
+      cell.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        cell.classList.add('drag-over');
+      });
+      cell.addEventListener('dragleave', () => cell.classList.remove('drag-over'));
+      cell.addEventListener('drop', e => {
+        e.preventDefault();
+        cell.classList.remove('drag-over');
+        const fromKey = dragSource || e.dataTransfer.getData('text/plain');
+        if (!fromKey || fromKey === key) return;
+        const movingCode = gridState[fromKey];
+        const targetCode = gridState[key];
+        if (targetCode) {
+          // troca de lugar
+          gridState[fromKey] = targetCode;
+          gridState[key] = movingCode;
+        } else {
+          delete gridState[fromKey];
+          gridState[key] = movingCode;
+        }
+        dragSource = null;
+        renderWeekGrid();
+      });
+
       table.appendChild(cell);
     });
   });
@@ -1577,6 +1863,14 @@ document.getElementById('clear-grade').addEventListener('click', () => {
 });
 
 document.getElementById('export-pdf').addEventListener('click', () => {
+  const fullName = [studentInfo.nome, studentInfo.sobrenome].filter(Boolean).join(' ');
+  const header = document.getElementById('print-header');
+  const parts = [];
+  if (studentInfo.semestre) parts.push(`${studentInfo.semestre}º semestre`);
+  if (studentInfo.ano) parts.push(studentInfo.ano);
+  header.innerHTML = fullName || parts.length
+    ? `<div class="ph-name">${fullName || 'Grade semanal'}</div><div class="ph-meta">${parts.join(' / ') || 'Engenharia de Minas — UFBA'}</div>`
+    : '';
   window.print();
 });
 
@@ -1617,6 +1911,7 @@ document.getElementById('search-grade').addEventListener('input', e => {
 });
 
 renderWeekGrid();
+renderWarnings();
 </script>
 </body>
 </html>
