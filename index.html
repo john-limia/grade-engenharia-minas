@@ -464,13 +464,13 @@
     border-radius:0 0 8px 8px;
     overflow:hidden;
     display:grid;
-    grid-template-columns:64px repeat(6, 1fr);
+    grid-template-columns:82px repeat(6, 1fr);
     background:var(--surface);
   }
   .wg-cell{
     border-right:1px solid var(--line);
     border-bottom:1px solid var(--line);
-    min-height:48px;
+    min-height:58px;
     display:flex; align-items:center; justify-content:center;
     font-size:11px;
     position:relative;
@@ -488,9 +488,12 @@
   }
   .wg-time{
     font-family:'IBM Plex Mono', monospace;
-    font-size:10.5px;
+    font-size:9.5px;
     color:var(--ink-faint);
     background:var(--surface-hi);
+    line-height:1.3;
+    text-align:center;
+    white-space:nowrap;
   }
   .wg-slot{ cursor:pointer; background:var(--void); }
   .wg-slot:nth-child(odd){ background:var(--surface); }
@@ -499,10 +502,11 @@
   .wg-block{
     width:100%; height:100%;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:9.5px;
-    font-weight:600;
-    line-height:1.2;
+    font-family:'Big Shoulders Display', sans-serif;
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:0.01em;
+    line-height:1;
     text-align:center;
     padding:2px;
     position:relative;
@@ -666,13 +670,31 @@
     border-left:3px solid transparent;
   }
   .cp-item:hover:not([disabled]){ background:var(--surface-hi); }
-  .cp-item[disabled]{ opacity:0.4; cursor:not-allowed; }
+  .cp-item[disabled]{ cursor:not-allowed; }
   .cp-item.n-basico{ border-left-color:var(--basico); }
   .cp-item.n-profissionalizante{ border-left-color:var(--profi); }
   .cp-item.n-especifico{ border-left-color:var(--especi); }
   .cp-code{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; font-weight:600; color:var(--ink); }
   .cp-name{ font-size:12.5px; color:var(--ink-dim); }
   .cp-rem{ font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--ore); margin-top:2px; }
+  .cp-item.cp-done{
+    background:var(--surface-hi);
+    border-left-color:var(--ink-faint);
+    opacity:0.6;
+  }
+  .cp-item.cp-done .cp-code,
+  .cp-item.cp-done .cp-name{ color:var(--ink-faint); text-decoration:line-through; }
+  .cp-item.cp-done .cp-rem{ color:var(--profi); font-weight:700; text-decoration:none; }
+  .cp-divider{
+    margin:4px 6px 2px;
+    padding-top:6px;
+    border-top:1px dashed var(--line-strong);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
 
   @media print{
     .hero, .tabs, .toolbar, .hover-hint, .composition, footer,
@@ -1097,7 +1119,7 @@
     .selected-list{ padding:14px 6vw; }
     .weekgrid-wrap{ padding:18px 6vw 40px; }
     .weekgrid-table{
-      grid-template-columns:56px repeat(6, 84px);
+      grid-template-columns:70px repeat(6, 84px);
       overflow-x:auto;
     }
   }
@@ -1746,20 +1768,40 @@ function openCellPicker(key, cell){
   title.textContent = 'Escolha a disciplina para este horário';
   pop.appendChild(title);
 
-  [...selectedCodes].map(findAny).filter(Boolean).forEach(item => {
+  const entries = [...selectedCodes].map(findAny).filter(Boolean).map(item => {
     const need = neededBlocks(item);
     const have = placedBlocks(item.code);
-    const remaining = need - have;
+    return { item, need, have, remaining: need - have };
+  });
+  // disponíveis primeiro, completas vão para o final da lista
+  entries.sort((a, b) => (a.remaining > 0) === (b.remaining > 0) ? 0 : (a.remaining > 0 ? -1 : 1));
+
+  const hasAvailable = entries.some(e => e.remaining > 0);
+  const hasDone = entries.some(e => e.remaining <= 0);
+  let dividerAdded = false;
+
+  entries.forEach(({ item, need, have, remaining }) => {
+    const done = remaining <= 0;
+    if (done && hasAvailable && hasDone && !dividerAdded) {
+      const div = document.createElement('div');
+      div.className = 'cp-divider';
+      div.textContent = 'Já completas';
+      pop.appendChild(div);
+      dividerAdded = true;
+    }
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = `cp-item n-${item.nucleo}`;
-    btn.innerHTML = `<span class="cp-code">${item.code}</span><span class="cp-name">${item.name}</span><span class="cp-rem">${remaining > 0 ? `faltam ${remaining} bloco${remaining > 1 ? 's' : ''}` : 'completo — clique para trocar aqui'}</span>`;
-    btn.addEventListener('click', () => {
-      gridState[key] = item.code;
-      closePopover();
-      renderWeekGrid();
-      renderSelectedList();
-    });
+    btn.className = done ? 'cp-item cp-done' : `cp-item n-${item.nucleo}`;
+    btn.disabled = done;
+    btn.innerHTML = `<span class="cp-code">${item.code}</span><span class="cp-name">${item.name}</span><span class="cp-rem">${done ? '✓ completo — todos os blocos preenchidos' : `faltam ${remaining} bloco${remaining > 1 ? 's' : ''}`}</span>`;
+    if (!done) {
+      btn.addEventListener('click', () => {
+        gridState[key] = item.code;
+        closePopover();
+        renderWeekGrid();
+        renderSelectedList();
+      });
+    }
     pop.appendChild(btn);
   });
 
@@ -1805,7 +1847,7 @@ function renderWeekGrid(){
   TIME_SLOTS.forEach((time, slotIdx) => {
     const t = document.createElement('div');
     t.className = 'wg-cell wg-time';
-    t.textContent = time;
+    t.innerHTML = `${time}<br>${addMinutes(time, 55)}`;
     table.appendChild(t);
     DAYS.forEach(day => {
       const key = `${day}-${slotIdx}`;
