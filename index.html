@@ -587,13 +587,26 @@
 
   .print-header{ display:none; }
   @media print{
-    .print-header{
-      display:block;
-      padding:16px 0 20px;
-      font-family:'IBM Plex Sans', sans-serif;
-    }
-    .print-header .ph-name{ font-size:18px; font-weight:700; color:var(--ink); }
-    .print-header .ph-meta{ font-size:12px; color:var(--ink-dim); margin-top:2px; }
+    body{ background:#fff; }
+    .print-header{ display:block; font-family:'IBM Plex Sans', sans-serif; color:#1a1a1a; }
+    .ph-top{ display:flex; justify-content:space-between; font-size:9px; color:#555; margin-bottom:6px; }
+    .ph-masthead{ text-align:center; border-bottom:2px solid #1a1a1a; padding-bottom:10px; margin-bottom:14px; }
+    .ph-masthead .ph-org{ font-size:11px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; }
+    .ph-masthead .ph-sys{ font-size:9.5px; color:#444; margin-top:2px; }
+    .ph-masthead .ph-disclaimer{ font-size:8.5px; color:#a34b32; margin-top:5px; font-style:italic; }
+    .ph-title{ text-align:center; font-size:15px; font-weight:700; text-transform:uppercase; margin:12px 0 2px; }
+    .ph-subtitle{ text-align:center; font-size:11px; color:#444; margin-bottom:14px; }
+    .ph-box{ border:1px solid #999; border-radius:3px; padding:10px 14px; margin-bottom:16px; font-size:11px; line-height:1.9; }
+    .ph-box b{ display:inline-block; width:130px; }
+    .ph-tablewrap{ margin-bottom:18px; }
+    .ph-tablewrap-title{ background:#e8e8e8; border:1px solid #999; border-bottom:none; text-align:center; font-size:10px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; padding:5px; }
+    table.ph-table{ width:100%; border-collapse:collapse; font-size:10px; }
+    table.ph-table th{ background:#f3f3f3; border:1px solid #999; padding:6px 8px; text-align:left; font-size:9.5px; text-transform:uppercase; }
+    table.ph-table td{ border:1px solid #bbb; padding:6px 8px; vertical-align:top; }
+    table.ph-table td.ph-status{ font-weight:700; white-space:nowrap; }
+    .ph-status-ok{ color:#2f6b3f; }
+    .ph-status-pending{ color:#a34b32; }
+    .ph-foot{ display:block !important; font-size:8.5px; color:#666; border-top:1px solid #ccc; padding-top:8px; margin-top:10px; text-align:center; line-height:1.6; }
   }
 
   /* ---------- AVISOS DA GRADE ---------- */
@@ -761,7 +774,7 @@
     display:grid;
     grid-template-columns:96px 1fr;
     gap:0;
-    padding:38px 8vw 38px calc(8vw - 0px);
+    padding:22px 8vw 22px calc(8vw - 0px);
     border-bottom:1px solid var(--line);
     background:var(--void);
   }
@@ -777,7 +790,7 @@
   .stratum-marker .n{
     font-family:'Big Shoulders Display', sans-serif;
     font-weight:800;
-    font-size:52px;
+    font-size:42px;
     line-height:0.85;
     color:var(--ink-faint);
   }
@@ -790,15 +803,15 @@
     margin-top:6px;
   }
   .stratum-marker .depth-line{
-    width:1px; height:26px;
+    width:1px; height:16px;
     background:var(--line-strong);
-    margin:10px 0 0 3px;
+    margin:8px 0 0 3px;
   }
 
   .card-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(216px, 1fr));
-    gap:10px;
+    grid-template-columns:repeat(auto-fill, minmax(188px, 1fr));
+    gap:8px;
     align-content:start;
   }
 
@@ -808,7 +821,7 @@
     border:1px solid var(--line);
     border-left:3px solid var(--ink-faint);
     border-radius:var(--radius);
-    padding:13px 14px 12px;
+    padding:9px 11px 8px;
     cursor:pointer;
     transition: transform .12s ease, border-color .12s ease, background .12s ease, opacity .15s ease, box-shadow .12s ease;
     text-align:left;
@@ -850,28 +863,28 @@
   .card.n-especifico .code{ color:var(--especi); }
   .card .code{
     font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
+    font-size:10.5px;
     letter-spacing:0.04em;
     font-weight:600;
     color:var(--ink-faint);
     display:block;
-    margin-bottom:6px;
+    margin-bottom:4px;
   }
   .card .name{
-    font-size:14px;
+    font-size:13px;
     font-weight:500;
-    line-height:1.32;
+    line-height:1.28;
     color:var(--ink);
     display:block;
-    min-height:36px;
+    min-height:0;
   }
   .card .foot{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-top:11px;
+    margin-top:7px;
     font-family:'IBM Plex Mono', monospace;
-    font-size:10.5px;
+    font-size:10px;
     color:var(--ink-dim);
   }
   .card .anual-badge{
@@ -1242,6 +1255,9 @@
       </div>
     </div>
     <div class="weekgrid-table" id="weekgrid-table"></div>
+    <div class="ph-foot" style="display:none;">
+      Esta simulação foi gerada por uma ferramenta independente de organização acadêmica, sem vínculo, representação ou endosso oficial da UFBA. Os horários, turmas e vagas reais devem ser sempre confirmados e solicitados através do SIGAA. Este documento não constitui comprovante de matrícula.
+    </div>
     <div class="weekgrid-foot">
       <span>↳ A distribuição é uma simulação para apoiar sua organização.</span>
       <span>Adicione componentes na lista abaixo ↓</span>
@@ -1863,15 +1879,76 @@ document.getElementById('clear-grade').addEventListener('click', () => {
   renderSelectedList();
 });
 
-document.getElementById('export-pdf').addEventListener('click', () => {
+function addMinutes(hhmm, mins){
+  const [h, m] = hhmm.split(':').map(Number);
+  const total = h * 60 + m + mins;
+  const hh = Math.floor(total / 60) % 24;
+  const mm = total % 60;
+  return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+}
+
+function buildPrintDocument(){
+  const now = new Date();
+  const dataEmissao = now.toLocaleDateString('pt-BR');
+  const horaEmissao = now.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
   const fullName = [studentInfo.nome, studentInfo.sobrenome].filter(Boolean).join(' ');
-  const header = document.getElementById('print-header');
-  const parts = [];
-  if (studentInfo.semestre) parts.push(`${studentInfo.semestre}º semestre`);
-  if (studentInfo.ano) parts.push(studentInfo.ano);
-  header.innerHTML = fullName || parts.length
-    ? `<div class="ph-name">${fullName || 'Grade semanal'}</div><div class="ph-meta">${parts.join(' / ') || 'Engenharia de Minas — UFBA'}</div>`
-    : '';
+  const periodo = (studentInfo.ano && studentInfo.semestre) ? `${studentInfo.ano}.${studentInfo.semestre}` : '—';
+
+  const items = [...selectedCodes].map(findAny).filter(Boolean);
+  const totalHours = items.reduce((s, i) => s + parseHours(i.ch), 0);
+
+  const rows = items.map(item => {
+    const slots = [];
+    TIME_SLOTS.forEach((time, idx) => {
+      DAYS.forEach(day => {
+        if (gridState[`${day}-${idx}`] === item.code) {
+          slots.push(`${day} ${time} às ${addMinutes(time, 55)}`);
+        }
+      });
+    });
+    const need = neededBlocks(item);
+    const have = slots.length;
+    const statusHtml = have >= need
+      ? `<span class="ph-status-ok">COMPLETO</span>`
+      : `<span class="ph-status-pending">${have}/${need} BLOCOS</span>`;
+    return `<tr>
+      <td><strong>${item.code}</strong> — ${item.name}<br><span style="color:#666">${item.ch} · ${NUCLEO_LABEL[item.nucleo]}</span></td>
+      <td>${slots.length ? slots.join('<br>') : '<span style="color:#a34b32">Não encaixada na grade</span>'}</td>
+      <td class="ph-status">${statusHtml}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('print-header').innerHTML = `
+    <div class="ph-top">
+      <span>Simulação gerada em ${dataEmissao}, ${horaEmissao}</span>
+      <span>Ferramenta independente — não vinculada ao SIGAA/UFBA</span>
+    </div>
+    <div class="ph-masthead">
+      <div class="ph-org">Universidade Federal da Bahia</div>
+      <div class="ph-sys">Simulador de Grade — Engenharia de Minas</div>
+      <div class="ph-disclaimer">Documento não-oficial, gerado por ferramenta independente de planejamento acadêmico. Não substitui o comprovante de matrícula do SIGAA.</div>
+    </div>
+    <div class="ph-title">Simulação de Grade Semanal</div>
+    <div class="ph-subtitle">Período planejado ${periodo}</div>
+    <div class="ph-box">
+      <div><b>Discente:</b> ${fullName || '—'}</div>
+      <div><b>Curso:</b> Engenharia de Minas - Salvador - Bacharelado - UFBA</div>
+      <div><b>Período planejado:</b> ${periodo}</div>
+      <div><b>Componentes selecionados:</b> ${items.length}</div>
+      <div><b>Carga horária total:</b> ${totalHours}h${totalHours > HOURS_LIMIT ? ` <span style="color:#a34b32">(acima do limite de ${HOURS_LIMIT}h)</span>` : ''}</div>
+    </div>
+    <div class="ph-tablewrap">
+      <div class="ph-tablewrap-title">Componentes selecionados</div>
+      <table class="ph-table">
+        <thead><tr><th>Componente curricular</th><th>Horários atribuídos</th><th>Situação</th></tr></thead>
+        <tbody>${rows || '<tr><td colspan="3" style="text-align:center;color:#888">Nenhum componente selecionado</td></tr>'}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+document.getElementById('export-pdf').addEventListener('click', () => {
+  buildPrintDocument();
   window.print();
 });
 
